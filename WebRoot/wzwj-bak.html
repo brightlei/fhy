@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="content-type" content="text/html; charset=UTF-8">
+		<title>违章违纪</title>
+		<link rel="stylesheet" href="css/main.css"/>
+		<style type="text/css">
+		.ulcss li{display:inline-block;margin-left:5px;margin-bottom:5px;}
+		</style>
+		<script type="text/javascript" src="jslib/jeasyui.js" ></script>
+	</head>
+<body>
+	<div id="mytab" class="easyui-tabs" data-options="fit:true">
+		<div title="个人下发违章违纪通知书" style="height:100%;">
+			<div id="dgtool" style="padding:5px;overflow: hidden;">
+				<a href="javascript:void(0)" onclick="openWin()" class="easyui-linkbutton normal">违章违纪数据录入</a>
+				<span style="float:right;">
+					<input id="key" class="easyui-textbox" data-options="buttonText:'查询',buttonAlign:'right',buttonIcon:'icon-search',prompt:'请输入查询关键字',onClickButton:searchByKey" style="width:220px;height:32px;">
+				</span>
+			</div>
+			<table id="dg"></table>
+		</div>
+		<div title="违章违纪查询" style="height:100%;">
+			<div id="dgcxtool" style="padding:5px;overflow: hidden;">
+				<form id="myform" method="post">
+					<ul class="ulcss">
+						<li>开始日期：<input class="easyui-datebox" data-options="editable:false,onSelect:selectDate" id="ksrq" name="ksrq" style="width:110px;"></li>
+						<li>结束日期：<input class="easyui-datebox" data-options="editable:false,onSelect:selectDate" id="jsrq" name="jsrq" style="width:110px;"></li>
+						<li>发现单位：<input class="easyui-combotree" id="fxdw" name="fxdw" style="width:230px;"></li>
+						<li>发现人：<input class="easyui-textbox" id="fxr" name="fxr" style="width:70px;"></li>
+						<li>违章类别：<input class="easyui-combobox" id="wzlb" name="wzlb" style="width:160px;"></li>
+						<li>违章性质：<input class="easyui-combobox" id="wzxz" name="wzxz" style="width:130px;"></li>
+						<li>违章内容：<input class="easyui-textbox" id="wznr" name="wznr" style="width:130px;"></li>
+						<li>责任车间：<select class="easyui-combobox" id="cj" name="cj" style="width:130px;"></select></li>
+						<li>责任工区：<select class="easyui-combobox" id="gq" name="gq" style="width:130px;"></select></li>
+						<li>主要负责人：<input class="easyui-textbox" id="zyzrr" name="zyzrr" style="width:70px;"></li>
+						<li>点内外：<select class="easyui-combobox" id="dnw" name="dnw" style="width:80px;"></select></li>
+						<li>夜间白天：<select class="easyui-combobox" id="yjbt" name="yjbt" style="width:80px;"></select></li>
+						<li>
+							<a id="btn_submit" href="javascript:void(0)" class="easyui-linkbutton normal" data-options="iconCls:'icon-search'" style="width:70px;" onclick="searchByCondition()">查询</a>
+							<a href="javascript:void(0)" class="easyui-linkbutton danger" data-options="iconCls:'icon-redo'" style="width:70px;" onclick="resetCondition()">重置</a>
+						</li>
+					</ul>
+				</form>
+			</div>
+			<table id="dg-cx"></table>
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="jsweb/wzwj.js?t=11112" ></script>

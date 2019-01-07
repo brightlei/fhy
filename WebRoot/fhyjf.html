@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="content-type" content="text/html; charset=UTF-8">
+		<title>防护员积分</title>
+		<link rel="stylesheet" href="css/main.css"/>
+		<link rel="stylesheet" href="layui/css/layui.css" media="all">
+		<script type="text/javascript" src="jslib/jeasyui.js" ></script>
+	</head>
+<body class="easyui-layout">
+	<div data-options="region:'west',title:'查询检索',collapsible:false" style="width:240px;padding:5px;">
+		<form id="myform">
+		<input type="hidden" id="action" name="action" value="loaddata"/>
+		<input type="hidden" id="method" name="method" value="queryFhyScoreMoney"/>
+		<table class="mytable" cellpadding="0" cellspacing="0" style="width:100%;">
+			<tr>
+				<td class="attr">年份：</td>
+				<td>
+					<select class="easyui-combobox" id="year" name="year" data-options="onShowPanel:onShowComboPanel" style="width:150px;">
+						<option value="2018">2018</option>
+						<option value="2019">2019</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td class="attr">月份：</td>
+				<td>
+					<select class="easyui-combobox" id="month" name="month" data-options="onShowPanel:onShowComboPanel"  style="width:150px;">
+						<option value="01">1月</option>
+						<option value="02">2月</option>
+						<option value="03">3月</option>
+						<option value="04">4月</option>
+						<option value="05">5月</option>
+						<option value="06">6月</option>
+						<option value="07">7月</option>
+						<option value="08">8月</option>
+						<option value="09">9月</option>
+						<option value="10">10月</option>
+						<option value="11">11月</option>
+						<option value="12">12月</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td class="attr">车间：</td>
+				<td>
+					<select id="cj" name="cj" class="easyui-combobox" style="width:150px;"></select>
+				</td>
+			</tr>
+			<tr>
+				<td class="attr">工区：</td>
+				<td><input class="easyui-textbox" id="gq" name="gq" style="width:150px;"></td>
+			</tr>
+			<tr>
+				<td class="attr">性别：</td>
+				<td>
+					<select class="easyui-combobox" data-options="onShowPanel:onShowComboPanel" id="sex" name="sex" style="width:150px;">
+						<option value="">全部</option>
+						<option value="男">男</option>
+						<option value="女">女</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td class="attr">政治面貌：</td>
+				<td>
+					<select class="easyui-combobox" data-options="onShowPanel:onShowComboPanel" id="zzmm" name="zzmm" style="width:150px;">
+						
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td class="attr">起始年龄：</td>
+				<td><input class="easyui-textbox" id="qsnl" name="qsnl" value="20" data-options="required:true" style="width:150px;"></td>
+			</tr>
+			<tr>
+				<td class="attr">终止年龄：</td>
+				<td><input class="easyui-textbox" id="zznl" name="zznl" value="70" data-options="required:true" style="width:150px;"></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<a id="btnQuery" href="javascript:queryData()" class="easyui-linkbutton normal" style="width:80px;">查询</a>
+				</td>
+			</tr>
+		</table>
+		</form>
+	</div>
+	<div data-options="region:'center',title:'防护员积分列表'">
+		<table id="dg"></table>
+	</div>
+</body>
+</html>
+<script src="layer/layer.js"></script>
+<script type="text/javascript" src="jsweb/fhyjf.js" ></script>
+

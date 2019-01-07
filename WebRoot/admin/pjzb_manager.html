@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+  	<meta name="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>评价指标管理</title>
+    <style type="text/css">
+    .inputcss{padding:5px;border:1px solid #f7f7f7;}
+    .dataTable td{padding:8px;}
+    </style>
+    <link rel="stylesheet" href="../css/main.css"/>
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all">
+    <script type="text/javascript" src="../jslib/jeasyui.js"></script>
+    <script type="text/javascript" src="../layui/layui.js"></script>
+    <script type="text/javascript" src="js/admin_pjzb.js?t=123"></script>
+    <script type="text/javascript" src="../layer/layer.js" ></script>
+	<script type="text/javascript" src="../layer/layer-common.js" ></script>
+</head>
+<body oncontextmenu="return false" style="background:#FFFFFF;" class="easyui-layout">
+	<div data-options="region:'west',border:false" style="width:230px;padding:5px;">
+        <div id="treePanel" class="easyui-panel" title="评价指标目录树" fit="true" style="padding:0px;">
+			<div id="ids"></div>
+			<div id="mm" class="easyui-menu" style="width:120px;">
+			    <div onclick="appendTreeNode('child')" data-options="iconCls:'icon-add'">添加下级指标</div>
+			    <div onclick="appendTreeNode('brother')" data-options="iconCls:'icon-add'">添加同级指标</div>
+			    <div onclick="removeit()" data-options="iconCls:'icon-remove'">删除指标</div>
+		    </div>
+            <ul title="鼠标点键可以添加部门、修改部门、删除部门和添加人员等操作" id="menuTree" class="easyui-tree" style="margin:5px;"></ul>
+		</div>
+    </div>
+	<div id="regionCenter" data-options="region:'center',border:false" class="easyui-layout">
+		<div data-options="region:'north',border:false" style="height:37px;padding:6px;overflow:hidden;">
+			<form id="myform">
+				<input type="hidden" id="id" value=""/>
+				<span>指标名称：<input type="text" class="easyui-textbox" id="input_name" data-options="prompt:'请输入评价指标名称'" style="width:200px;padding:5px;"/></span>
+				<span>指标公式：<input type="text" class="easyui-textbox" id="input_zbgs" data-options="prompt:'请输入评价指标公式'" style="width:300px;padding:5px;"/></span>
+				<span><a href="javascript:void(0)" class="easyui-linkbutton normal" iconCls="icon-edit" onclick="updateMenu()">保存数据</a></span>
+			</form>
+		</div>
+		<div data-options="region:'center',border:false" style="padding:5px;">
+			<div id="tb" style="padding:6px;">
+				<a id="btn_add" onclick="addPjzbData()" href="javascript:void(0)" class="easyui-linkbutton normal" iconCls="icon-add" data-options="disabled:true">添加数据</a>
+				<a id="btn_delete" onclick="betchDeleteData()" href="javascript:void(0)" class="easyui-linkbutton danger" data-options="disabled:true">批量删除</a>
+				<a href="../template/评价指标数据表-Template.xls" class="easyui-linkbutton c1" iconCls="icon-hamburg-down" download="评价指标数据表数据导入模板">数据导入表格模板下载</a>
+				<a id="btn_upload" href="javascript:void(0)" class="easyui-linkbutton normal" iconCls="icon-standard-database-go" data-options="disabled:true">批量导入数据</a>
+			</div>
+			<table id="dg"></table>
+		</div>
+	</div>
+	<div id="divform" style="display:none;width:600px;height:310px;">
+		<form id="dataform" method="post">
+		<input type="hidden" id="pjzbdataid" name="pjzbdataid" value=""/>
+		<input type="hidden" id="action" name="action" value="saveOrUpdate"/>
+		<input type="hidden" id="method" name="method" value="addPjzbData"/>
+		<input type="hidden" id="zbid" name="zbid" value=""/>
+		<table class="dataTable" border="1" bordercolor="#ccc" cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;">
+			<tr>
+				<td style="text-align:right;">评价条款：</td>
+				<td><input id="pjtk" name="pjtk" class="easyui-textbox" data-options="required:true,prompt:'请输入评价条款',multiline:true" style="width:450px;height:90px;"></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;">评分：</td>
+				<td><input id="pf" name="pf" class="easyui-numberbox" data-options="required:true,prompt:'请输入评分，数据格式为数值'" style="width:450px;height:30px;"></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;">权重1：</td>
+				<td><input id="qz1" name="qz1" class="easyui-numberbox" data-options="precision:2,required:true,prompt:'请输入权重1，数据格式为数值'" style="width:450px;height:30px;"></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;">权重2：</td>
+				<td><input id="qz2" name="qz2" class="easyui-numberbox" data-options="precision:2,required:true,prompt:'请输入权重2，数据格式为数值'" style="width:450px;height:30px;"></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<a id="btnSave" href="javascript:void(0)" class="easyui-linkbutton normal" data-options="iconCls:'icon-ok'" onclick="doSubmitAction()" style="height:30px;">提交</a>
+				</td>
+			</tr>
+		</table>
+		</form>
+	</div>
+</body>
+</html>

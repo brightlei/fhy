@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>防护员积分管理系统111</display-name>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:applicationContext.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>com.zondy.listener.ApplicationListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>com.zondy.listener.SessionListener</listener-class>
+	</listener>
+	<!-- 页面启动监听类结束 -->
+	<!--  -->
+	<filter>
+    <filter-name>PageFilter</filter-name>
+    <filter-class>com.zondy.filter.PageFilter</filter-class>
+    <init-param>
+      <param-name>exclusions</param-name>
+      <param-value>*.js,*.gif,*.jpg,*.png,*.css,*.ico,*.json</param-value>
+    </init-param>
+    <init-param>
+      <param-name>exclude</param-name>
+      <param-value>login.html;tips.html</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>PageFilter</filter-name>
+    <url-pattern>*.html</url-pattern>
+  </filter-mapping>
+  
+	<!-- 页面编码设置 -->
+	<filter>
+		<filter-name>Set Character Encoding</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<!-- 强制进行转换 -->
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<servlet>
+		<description>ServerServlet</description>
+		<display-name>ServerServlet</display-name>
+		<servlet-name>ServerServlet</servlet-name>
+		<servlet-class>com.zondy.servlet.ServerServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>ApiServlet</description>
+		<display-name>ApiServlet</display-name>
+		<servlet-name>ApiServlet</servlet-name>
+		<servlet-class>com.zondy.servlet.ApiServlet</servlet-class>
+	</servlet>
+  <servlet>
+    <description>LogoutServlet</description>
+    <display-name>LogoutServlet</display-name>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>com.zondy.servlet.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>DownloadServlet</description>
+    <display-name>DownloadServlet</display-name>
+    <servlet-name>DownloadServlet</servlet-name>
+    <servlet-class>com.zondy.servlet.DownloadServlet</servlet-class>
+  </servlet>
+
+
+	<servlet-mapping>
+		<servlet-name>ApiServlet</servlet-name>
+		<url-pattern>/service/api</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServerServlet</servlet-name>
+		<url-pattern>/jslib/server.js</url-pattern>
+	</servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/servlet/logout</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DownloadServlet</servlet-name>
+    <url-pattern>/servlet/download</url-pattern>
+  </servlet-mapping>
+	<!-- 页面超时时间设置：单位为分钟 -->
+	<session-config>
+		<session-timeout>20</session-timeout>
+	</session-config>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+</web-app>

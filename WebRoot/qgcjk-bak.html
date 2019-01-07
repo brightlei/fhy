@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="content-type" content="text/html; charset=UTF-8">
+		<title>全过程监控</title>
+		<link rel="stylesheet" href="css/main.css"/>
+		<script type="text/javascript" src="jslib/jeasyui.js" ></script>
+	</head>
+<body>
+	<div id="mytab" class="easyui-tabs" data-options="fit:true">
+		<div title="全过程作业监控信息">
+			<div id="dgtool" style="padding:5px;overflow: hidden;">
+				<a href="javascript:void(0)" onclick="openWin()" class="easyui-linkbutton normal">全过程监控表填报</a>
+				<span style="float:right;">
+					<input id="key" class="easyui-textbox" data-options="buttonText:'查询',buttonAlign:'right',buttonIcon:'icon-search',prompt:'请输入查询关键字',onClickButton:searchByKey" style="width:220px;height:32px;">
+				</span>
+			</div>
+			<table id="dg"></table>
+		</div>
+		<div title="全过程作业监控查询">
+			<div id="cxtool" style="padding:5px;overflow:hidden;">
+				<form id="myform" method="post">
+					<table class="mytable">
+						<tr>
+							<td>起止日期：</td>
+							<td><input class="easyui-datebox" editable="false" id="ksrq" name="ksrq" style="width:110px;"></td>
+							<td>~</td>
+							<td><input class="easyui-datebox" editable="false" id="jsrq" name="jsrq" style="width:110px;"></td>
+							<td>作业项目：</td>
+							<td><input class="easyui-textbox" id="zyxm" name="zyxm" style="width:100px;"></td>
+							<td>车间：</td>
+							<td><select class="easyui-combobox" id="cj" name="cj" style="width:120px;"></select></td>
+							<td>工区：</td>
+							<td><select class="easyui-combobox" id="gq" name="gq" style="width:120px;"></select></td>
+							<td>驻站：</td>
+							<td><select class="easyui-textbox" id="zz" name="zz" style="width:60px;"></select></td>
+							<td>现场：</td>
+							<td><input class="easyui-textbox" id="xc" name="xc" style="width:60px;"></td>
+							<td>远端：</td>
+							<td><input class="easyui-textbox" id="yd" name="yd" style="width:60px;"></td>
+							<td>反向远端：</td>
+							<td><input class="easyui-textbox" id="fxyd" name="fxyd" style="width:60px;"></td>
+							<td>
+								<a href="javascript:void(0)" class="easyui-linkbutton c1" data-options="iconCls:'icon-search'" style="width:70px;" onclick="searchByCondition()">查询</a>
+								<!-- <a href="javascript:void(0)" class="easyui-linkbutton normal" data-options="iconCls:'icon-search'">高级查询</a> -->
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+			<table id="dg-cx"></table>
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="jsweb/qgcjk.js?t=1" ></script>

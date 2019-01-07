@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="content-type" content="text/html; charset=UTF-8">
+		<title>防护员奖励分配管理</title>
+		<link rel="stylesheet" href="css/main.css"/>
+		<style type="text/css">
+			.mytable td{padding:0px 5px;}
+		</style>
+		<script type="text/javascript" src="jslib/jeasyui.js" ></script>
+	</head>
+<body class="easyui-layout">
+	<!-- 下载文件页面 -->
+	<iframe id="downloadFrame" style="display:none;width:0px;height:0px;"></iframe>
+	<div data-options="region:'center',title:'防护员积分列表'">
+		<div id="tools" style="padding:5px;">
+			<table class="mytable" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>奖励金额：</td>
+				<td><input class="easyui-numberbox" id="jlje" name="jlje" precision="0" min="100" max="100000" data-options="buttonText:'￥',buttonAlign:'left'" style="width:80px;" value="5000">元</td>
+				<td>奖励人数：</td>
+				<td><input class="easyui-numberbox" id="jlrs" name="jlrs" precision="0" style="width:40px;" value="10">人</td>
+				<td>
+					<a href="javascript:void(0)" iconCls="icon-ok" class="easyui-linkbutton normal" onclick="setPersonMoney()">分配奖励</a>
+					<a id="saveBtn" href="javascript:void(0)" iconCls="icon-save" class="easyui-linkbutton c1" onclick="savePersonMoney()">保存分配奖励</a>
+					<a id="exportBtn" href="javascript:void(0)" iconCls="icon-hamburg-down" class="easyui-linkbutton c1" onclick="exportPersonMoney()">导出奖励分配结果</a>
+				</td>
+				<td id="msg" style="color:red;"></td>
+			</tr>
+		</table>
+		</div>
+		<table id="dg"></table>
+	</div>
+</body>
+</html>
+<script src="layer/layer.js"></script>
+<script type="text/javascript" src="jsweb/fhyjfjl.js" ></script>
+

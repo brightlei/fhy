@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="content-type" content="text/html; charset=UTF-8">
+		<title>全过程监控表填报</title>
+		<link rel="stylesheet" href="css/main.css"/>
+		<style type="text/css">
+		.formul li{border:1px solid #f7f7f7;width:20%;display:inline-block;padding:0px 5px;}
+		.title{width:100%;text-align:center;font-weight:bold;line-height:30px;background:#369ef7;color:#fff;margin-top:5px;}
+		.orange{border:2px solid orange;}
+		.red{border:2px solid red;}
+		</style>
+		<script type="text/javascript" src="jslib/server.js" ></script>
+		<script type="text/javascript" src="jslib/jeasyui.js" ></script>
+	</head>
+<body>
+	<div class="easyui-panel" data-options="fit:true" style="padding:10px;text-align:center;overflow-x:hidden;padding-bottom:70px;">
+		<form id="myform">
+		<ul class="formul" style="margin:0px auto;">
+			<input type="hidden" id="id" name="id" value=""/>
+			<input type="hidden" id="qgcjkbh" name="qgcjkbh" value=""/>
+			<input type="hidden" id="action" name="action" value="saveQgcjk"/>
+			<input type="hidden" id="method" name="method" value="saveQgcjk"/>
+			<input type="hidden" id="opuser" name="opuser" value=""/>
+			<li class="title" style="width:100%;">安全生成系统计划监控情况</li>
+			<li><input field="datebox" id="zyrq" name="zyrq" class="easyui-datebox" label="作业日期:" labelPosition="top" style="width:100%;" data-options=""></li>
+			<li><input field="combobox" id="cj" name="cj" class="easyui-combobox" label="车间:" labelPosition="top"  style="width:100%;"></li>
+			<li><input field="combobox" id="gq" name="gq" class="easyui-combobox" label="工区:" labelPosition="top"  style="width:100%;"></li>
+			<li><input field="combobox" id="jhly" name="jhly" class="easyui-combobox" label="计划来源:" labelPosition="top"  style="width:100%;"></li>
+			<li><input field="combobox" id="hangb" name="hangb" class="easyui-combobox" label="行别:" labelPosition="top"  style="width:100%;"></li>
+			<li><input field="combobox" id="dnw" name="dnw" class="easyui-combobox" label="点内/外:" labelPosition="top"  style="width:100%;"></li>
+			<li><input field="textbox" id="bgdd" name="bgdd" class="easyui-textbox" label="报工地点:" labelPosition="top" style="width:100%;" data-options=""></li>
+			<li><input field="textbox" id="zyxm" name="zyxm" class="easyui-textbox" label="作业项目:" labelPosition="top"  style="width:100%;" data-options=""></li>
+			<li><input field="textbox" id="phtzs" name="phtzs" class="easyui-textbox" label="配合通知书:" labelPosition="top" style="width:100%;" data-options=""></li>
+			<li><input field="textbox" id="phry" name="phry" class="easyui-textbox" label="配合人员:" labelPosition="top"  style="width:100%;" data-options=""></li>
+			<li><select field="combobox" id="sfyzjhxf" name="sfyzjhxf" class="easyui-combobox" data-options="onShowPanel:onShowComboPanel" label="是否与周计划相符:" labelPosition="top" style="width:100%;">
+				<option value="是">是</option>
+				<option value="否">否</option>
+			</select></li>
+			<li><input field="textbox" id="bzxx" name="bzxx" class="easyui-textbox" label="备注:" labelPosition="top" style="width:100%;"></li>
+			<li class="title" style="width:100%;">班前点名情况</li>
+			<li><input field="textbox" id="dbr" name="dbr" class="easyui-textbox" label="带班人:" labelPosition="top" style="width:100%;" data-options=""></li>
+			<li><input field="textbox" id="lwg" name="lwg" class="easyui-textbox" label="劳务工:" labelPosition="top" style="width:100%;" data-options=""></li>
+			<li><input field="numberbox" id="zgcqrs" name="zgcqrs" class="easyui-numberbox" label="职工出勤人数:" precision="0"  labelPosition="top" style="width:100%;" data-options=""></li>
+			<li><input field="numberbox" id="zgcql" name="zgcql" class="easyui-numberbox" label="职工出勤率:" suffix="%" labelPosition="top" style="width:100%;" data-options=""></li>
+			<li><input field="numberbox" id="shyjsl" name="shyjsl" class="easyui-numberbox" label="手机应交数量:" precision="0"  labelPosition="top" style="width:100%;" data-options=""></li>
+			<li><input field="numberbox" id="shsjsl" name="shsjsl" class="easyui-numberbox" label="手机实交数量:" precision="0"  labelPosition="top" style="width:100%;" data-options=""></li>
+			<li class="title" style="width:100%;">班中作业情况</li>
+			<li><input field="numberbox" id="sdrs" name="sdrs" class="easyui-numberbox" label="上道人数:" precision="0" labelPosition="top" style="width:100%;" data-options=""></li>
+			<li><input field="numberbox" id="xdrs" name="xdrs" class="easyui-numberbox" label="下道人数:" precision="0" labelPosition="top" style="width:100%;" data-options=""></li>
+			<li><input field="numberbox" id="sdl" name="sdl" class="easyui-numberbox" label="上道率:" suffix="%" labelPosition="top" style="width:100%;" data-options=""></li>
+			<li><input field="textbox" id="zz" name="zz" class="easyui-textbox" label="驻站:" labelPosition="top" style="width:100%;" data-options=""></li>
+			<li><input field="textbox" id="xc" name="xc" class="easyui-textbox" label="现场:" labelPosition="top" style="width:100%;" data-options=""></li>
+			<li><input field="textbox" id="yd" name="yd" class="easyui-textbox" label="远端:" labelPosition="top" style="width:100%;" data-options=""></li>
+			<li><input field="textbox" id="fxyd" name="fxyd" class="easyui-textbox" label="反向远端:" labelPosition="top" style="width:100%;" data-options=""></li>
+			<li><input field="textbox" id="jwmlh" name="jwmlh" class="easyui-textbox" label="进网命令号:" labelPosition="top" style="width:100%;"></li>
+			<li><input field="textbox" id="cwmlh" name="cwmlh" class="easyui-textbox" label="出网命令号:" labelPosition="top" style="width:100%;"></li>
+			<li><input field="combobox" id="wksbqk" name="wksbqk" class="easyui-combobox" label="网口锁闭情况:" labelPosition="top" style="width:100%;"></li>
+			<li><input field="textbox" id="gwjjsyqk" name="gwjjsyqk" class="easyui-textbox" label="高危机具使用情况:" labelPosition="top" style="width:100%;"></li>
+			<li><input field="timespinner" id="zzdgsj" name="zzdgsj" value="08:00" class="easyui-timespinner" label="驻站到岗时间:" labelPosition="top" style="width:100%;" data-options=""></li>
+			<li><input field="timespinner" id="zzlgsj" name="zzlgsj" value="18:00" class="easyui-timespinner" label="驻站离岗时间:" labelPosition="top" style="width:100%;" data-options=""></li>
+			<li><input field="timespinner" id="sjrwsj" name="sjrwsj" value="09:00" class="easyui-timespinner" label="实际入网时间:" labelPosition="top" style="width:100%;" data-options=""></li>
+			<li><input field="timespinner" id="sjcwsj" name="sjcwsj" value="18:00" class="easyui-timespinner" label="实际出网时间:" labelPosition="top" style="width:100%;" data-options=""></li>
+			<li><input field="textbox" id="tdtc" name="tdtc" class="easyui-textbox" label="图定天窗:" labelPosition="top" style="width:100%;"></li>
+			<li><input field="timespinner" id="tckssj" name="tckssj" value="09:00" class="easyui-timespinner" label="天窗开始时间:" labelPosition="top" style="width:100%;" data-options=""></li>
+			<li><input field="timespinner" id="tcsjsj" name="tcsjsj" value="18:00" class="easyui-timespinner" label="天窗结束时间:" labelPosition="top" style="width:100%;" data-options=""></li>
+			<li class="title" style="width:100%;">班后完成情况</li>
+			<li><input field="textbox" id="sjzydd" name="sjzydd" class="easyui-textbox" label="实际作业地点:" labelPosition="top" style="width:100%;"></li>
+			<li><input field="textbox" id="wcgzl" name="wcgzl" class="easyui-textbox" label="完成工作量:" labelPosition="top" style="width:100%;"></li>
+			<li><select field="combobox" id="jcwjjsfyz" name="jcwjjsfyz" class="easyui-combobox" data-options="onShowPanel:onShowComboPanel" label="进出网机具是否一致:" labelPosition="top" style="width:100%;">
+				<option value="是">是</option>
+				<option value="否">否</option>
+			</select></li>
+			<li><input field="numberbox" id="zbrs" name="zbrs" class="easyui-numberbox" label="值班人数:" precision="0" labelPosition="top" style="width:100%;" data-options=""></li>
+			<li class="title" style="width:100%;">其他问题</li>
+			<li><input field="textbox" id="czwt" name="czwt" class="easyui-textbox" label="存在问题:" labelPosition="top" style="width:100%;"></li>
+			<li><input field="textbox" id="clyj" name="clyj" class="easyui-textbox" label="处理意见:" labelPosition="top" style="width:100%;"></li>
+			<li style="width:100%;line-height:40px;">
+				<a id="btnSave" href="javascript:void(0)" class="easyui-linkbutton normal" iconCls="icon-ok" onclick="saveData()" style="width:120px;">保存数据</a>
+			</li>
+		</ul>
+		</form>
+	</div>
+	<script language="javascript">
+		var index = 0;
+	  document.onkeydown = function (event) {
+          var e = event || window.event || arguments.callee.caller.arguments[0];
+          if (e && e.keyCode == 13) {
+          		console.log("aaaa="+index);
+             	 e.keyCode = 9;
+             	 $("form *[field]").eq(index)[0].focus();
+             	 console.log($("form *[field]").eq(index)[0]);
+             	 index++;
+          }
+      };
+</script>
+</body>
+</html>
+<script type="text/javascript" src="layer/layer.js" ></script>
+<script type="text/javascript" src="layer/layer-common.js" ></script>
+<script type="text/javascript" src="jsweb/qgcjkform.js?t=1" ></script>

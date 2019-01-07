@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta charset="utf-8">
+  	<meta name="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>后台管理系统</title>
+    <style type="text/css">
+    .header{font:36px 黑体;font-weight:bold;margin:5px;}
+    /*表单样式**/
+	.tbform td{padding:3px;}
+	.tbform td input{width:400px;line-height:24px;height:24px;margin-right:5px;padding-left:5px;}
+	.rightcss{text-align:right;}
+	.dataTable td{padding:10px;}
+    </style>
+    <link rel="stylesheet" href="../css/main.css"/>
+    <script type="text/javascript" src="../jslib/server.js"></script>
+	<script type="text/javascript" src="../jslib/jeasyui.js"></script>
+	<script type="text/javascript" src="../jslib/Calender.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			setCalendar();
+			autoHeight();
+			$(window).resize(function(){autoHeight();});
+			loadTree();
+			$("#loginUser").html('<a href="javascript:void(0)" onclick="updateUserPwd()">'+user.xm+'</span>');
+			$("#loginTime").text(user.logintime);
+		});
+		
+		function loadTree(){
+			$.ajax({
+				type:"get",
+				url:"treegrid_admin.json",
+				dataType:"json",
+				success:function(treeData){
+					getRoleTree(treeData);
+				}
+			});
+		}
+		
+		function  getRoleTree(treeData){
+			var pageArr = user.menupages.split(",");
+			var node = null;
+			var children = null;
+			var child = null;
+			var pageurl = "";
+			for(var i=0;i<treeData.length;i++){
+				node = treeData[i];
+				children = node.children;
+				for(var k=0;k<children.length;k++){
+					child = children[k];
+					pageurl = "admin/"+child.href;
+					if($.inArray(pageurl,pageArr)==-1){
+						children.splice(k,1);
+						k--;
+					}
+				}
+				if(children.length==0){
+					treeData.splice(i,1);
+				}
+			}
+			$("#funTree").treegrid({
+				onClickRow:function(row){
+					doNodeAction(row);
+				},onLoadSuccess:function(row,data){
+					var children = $("#funTree").treegrid("getChildren",data[0].id);
+					$("#funTree").treegrid("select",children[0].id);
+					doNodeAction(children[0]);
+				}
+			}).treegrid("loadData",treeData);
+		}
+		
+		function autoHeight(){
+			var w = $("#regionCenter").width();
+			var h = $("#regionCenter").height();
+			$("#mainFrame").height(h);
+		}
+		//页面加载完成事件
+		function onloadComplete(){
+			//$("#mainFrame").attr("src","dataKindManager?t="+Math.random());
+			//$("#mainFrame").attr("src","pages/ybzql.jsp?type=SCMOC&t="+Math.random());
+		}
+		//点击左侧菜单事件
+		function doNodeAction(row){
+			var pageHref = row.href;
+			var tmpArr = new Array();
+			tmpArr.push(row.name);
+			var pnode = $("#funTree").treegrid("getParent",row.id);
+			while(pnode!=null){
+				tmpArr.push(pnode.name);
+				pnode = $("#funTree").treegrid("getParent",pnode.id);
+			}
+			var navArr = new Array();
+			for(var i=tmpArr.length-1;i>=0;i--){
+				navArr.push(tmpArr[i]);
+			}
+			if(pageHref){
+				var index = showLayerLoading("页面加载中，请稍候……");
+				top.$("#mainFrame").attr("src",pageHref+"?t="+Math.random());
+				top.$("#regionCenter").parent().find(".panel-title").text("当前位置："+navArr.join("  >  ")+"["+pageHref+"]");
+				$("#mainFrame").load(function(){
+					hideLayerLoading(index);
+				});
+			}
+		}
+		//收藏本站代码
+        jQuery.fn.addFavorite = function (l, h) {
+            return this.click(function () {
+                var t = jQuery(this);
+                if (jQuery.browser.msie) {
+                    window.external.addFavorite(h, l);
+                } else if (jQuery.browser.mozilla || jQuery.browser.opera) {
+                    t.attr("rel", "sidebar");
+                    t.attr("title", l);
+                    t.attr("href", h);
+                } else {
+                    alert("请使用Ctrl+D将本页加入收藏夹！");
+                }
+            });
+        };
+	</script>
+</head>
+<body class="easyui-layout" onload="onloadComplete()">
+	<!-- 个人账号密码修改 -->
+	<div id="divform" style="width:500px;">
+		<form id="myform" method="post">
+			<input type="hidden" id="action" name="action" value="updateUserPwd"/>
+			<table class="dataTable" border="1" bordercolor="#eeeeee" cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;">
+				<tr>
+					<td style="width:100px;text-align:right;">原密码：</td>
+					<td><input id="oldpwd" name="oldpwd" type="password" class="easyui-textbox" data-options="prompt:'请输入原密码',iconCls:'icon-lock',required:true" style="width:100%;height:36px;"></td>
+				</tr>
+				<tr>
+					<td style="text-align:right;">新密码：</td>
+					<td><input id="newpwd" name="newpwd" type="password" class="easyui-textbox" data-options="prompt:'请输入新密码',iconCls:'icon-lock',required:true" style="width:100%;height:36px;"></td>
+				</tr>
+				<tr>
+					<td style="text-align:right;">确认密码：</td>
+					<td><input id="newpwd2" name="newpwd2" type="password" class="easyui-textbox" data-options="prompt:'请输入确认密码',iconCls:'icon-lock',required:true" style="width:100%;height:36px;"></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<a id="btnSave" href="javascript:void(0)" class="easyui-linkbutton normal" data-options="iconCls:'icon-edit'" onclick="updatePwd()" style="height:36px;">修改密码</a>
+						<span id="msg"></span>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div data-options="region:'north'" style="height:58px;padding:0px;overflow:hidden;background:url(../images/bg.jpg);">
+		<div style="color:#fff;font:34px 微软雅黑;font-weight:bold;margin-left:10px;">后台配置管理系统</div>
+		<div id="div_calender" style="color:#fff;position:absolute;right:0px;top:1px;padding:2px 5px;font:13px 微软雅黑;font-weight:bold;"></div>
+		<div style="position:absolute;bottom:5px;right:5px;">
+			<a href="../index.html" class="easyui-linkbutton c9" data-options="iconCls:'icon-hamburg-home'">返回首页</a>
+			<a id="fav" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-cologne-star'">收藏本页</a>
+		    <a href="../servlet/logout" class="easyui-linkbutton" data-options="toggle:true,iconCls:'icon-cologne-logout'">注销登录</a>
+        </div>
+	</div>
+	<div data-options="region:'west',split:false,title:'导航菜单',iconCls:'icon-hamburg-category'" style="width:200px;padding:0px;background:#EEEEEE;overflow:hidden;">
+		<table id="funTree" 
+				data-options="
+					idField:'id',
+					fit:true,
+					treeField:'name',
+					border:false,
+					lines:false,
+					animate:true">
+			<thead>
+				<tr>
+					<th data-options="field:'name'" width="196">功能导航</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<div id="regionCenter" data-options="region:'center',title:'后台系统配置管理 >> 数据管理'" style="overflow:hidden;">
+		<div style="position:absolute;right:10px;top:3px;">
+            <table>
+                <tr>
+                    <td class="icon-hamburg-hire-me" style="width:20px;height:20px;"></td>
+                    <td id="loginUser" runat="server"></td>
+                    <td style="width:10px;"></td>
+                    <td class="icon-hamburg-full-time" style="width:20px;height:20px;"></td>
+                    <td id="loginTime" runat="server"></td>
+                </tr>
+            </table>
+        </div>
+		<iframe noresize="noresize" id="mainFrame" name="mainFrame" height="100%" width="100%"
+			border="0" frameborder="0" scrolling="auto"
+			style="background-color:#FFFFff;">
+		</iframe>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="../layer/layer.js" ></script>
+<script type="text/javascript" src="../layer/layer-common.js" ></script>
+<script>
+var layerindex = 0;
+//修改个人用户密码
+function updateUserPwd(){
+	layerindex = layer.open({
+		type: 1,
+		title: "个人账号密码修改",
+		skin: 'layui-layer-rim', //加上边框
+		area: ['500px', '274px'], //宽高
+		content: $('#divform')
+	});
+}
+
+//修改密码
+function updatePwd(){
+	$("#myform").form('submit',{
+		url:"../service/api",
+		onSubmit: function(){
+			var isValid = $(this).form('validate');
+			if(isValid){
+				var newpwd = $('#newpwd').textbox('getValue');
+				var newpwd2 = $('#newpwd2').textbox('getValue');
+				if(newpwd != newpwd2){
+					layer.msg('新密码和确认密码不一致！');
+					return false;
+				}else if(newpwd.length<6){
+					layer.msg('账号密码不能少于6位！');
+					return false;
+				}
+				layer.msg("数据处理中，请稍候...",{icon:16,shade:[0.5,'#333333'],time:10000});
+				$("#btnSave").linkbutton("disable");
+				setTimeout(function(){
+					$("#btnSave").linkbutton("enable");
+				},5000);
+			}
+			return isValid;// 返回false终止表单提交
+		},
+		success: function(jsonstr){
+			var json = eval('(' + jsonstr + ')');  
+			if(json.code==0){
+				var data = json.data;
+				if(parseInt(data,10)==1){
+					layer.close(layerindex);
+					layer.alert("密码修改成功，请牢记新密码！",{icon:6});
+				}else{
+					layer.alert("密码修改失败！",{icon:5});
+				}
+			}else{
+				layer.alert("密码修改失败！"+json.msg,{icon:5});
+			}
+		}
+	});
+}
+</script>

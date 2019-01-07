@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="content-type" content="text/html; charset=UTF-8">
+		<title>违章违纪查询</title>
+		<link rel="stylesheet" href="css/main.css"/>
+		<style type="text/css">
+		.ulcss li{display:inline-block;margin-left:5px;margin-bottom:5px;}
+		</style>
+		<script type="text/javascript" src="jslib/jeasyui.js" ></script>
+	</head>
+<body>
+	<!-- 下载文件页面 -->
+	<iframe id="downloadFrame" style="display:none;width:0px;height:0px;"></iframe>
+	<div id="dgcxtool" style="padding:5px;overflow: hidden;">
+		<form id="myform" method="post">
+			<ul class="ulcss">
+				<li>开始日期：<input class="easyui-datebox" data-options="editable:false,onSelect:selectDate" id="ksrq" name="ksrq" style="width:110px;"></li>
+				<li>结束日期：<input class="easyui-datebox" data-options="editable:false,onSelect:selectDate" id="jsrq" name="jsrq" style="width:110px;"></li>
+				<li>发现单位：<input class="easyui-combotree" id="fxdw" name="fxdw" style="width:230px;"></li>
+				<li>发现人：<input class="easyui-textbox" id="fxr" name="fxr" style="width:70px;"></li>
+				<li>违章类别：<input class="easyui-combobox" id="wzlb" name="wzlb" style="width:160px;"></li>
+				<li>违章性质：<input class="easyui-combobox" id="wzxz" name="wzxz" style="width:130px;"></li>
+				<li>违章内容：<input class="easyui-textbox" id="wznr" name="wznr" style="width:130px;"></li>
+				<li>责任车间：<select class="easyui-combobox" id="cj" name="cj" style="width:130px;"></select></li>
+				<li>责任工区：<select class="easyui-combobox" id="gq" name="gq" style="width:130px;"></select></li>
+				<li>主要负责人：<input class="easyui-textbox" id="zyzrr" name="zyzrr" style="width:70px;"></li>
+				<li>政治面貌：<select class="easyui-combobox" id="zzmm" name="zzmm" style="width:130px;"></select></li>
+				<li>岗位：<select class="easyui-combobox" id="zm" name="zm" style="width:130px;"></select></li>
+				<li>点内外：<select class="easyui-combobox" id="dnw" name="dnw" style="width:80px;"></select></li>
+				<li>夜间白天：<select class="easyui-combobox" id="yjbt" name="yjbt" style="width:80px;"></select></li>
+				<li>
+					<a id="btn_submit" href="javascript:void(0)" class="easyui-linkbutton normal" data-options="iconCls:'icon-search'" style="width:70px;" onclick="searchByCondition()">查询</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton danger" data-options="iconCls:'icon-redo'" style="width:70px;" onclick="resetCondition()">重置</a>
+					<a id="exportBtn" href="javascript:void(0)" iconCls="icon-hamburg-down" class="easyui-linkbutton c1" onclick="exportData()">导出数据</a>
+				</li>
+			</ul>
+		</form>
+	</div>
+	<table id="dg-cx"></table>
+</body>
+</html>
+<script src="layui/layui.js"></script>
+<script type="text/javascript" src="jsweb/wzwj_query.js?t=11112" ></script>

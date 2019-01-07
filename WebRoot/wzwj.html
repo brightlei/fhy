@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="content-type" content="text/html; charset=UTF-8">
+		<title>违章违纪</title>
+		<link rel="stylesheet" href="css/main.css"/>
+		<link rel="stylesheet" href="layui/css/layui.css" media="all">
+		<style type="text/css">
+		.ulcss li{display:inline-block;margin-left:5px;margin-bottom:5px;}
+		</style>
+		<script type="text/javascript" src="jslib/jeasyui.js" ></script>
+	</head>
+<body>
+	<!-- 下载文件页面 -->
+	<iframe id="downloadFrame" style="display:none;width:0px;height:0px;"></iframe>
+	<div id="mytab" class="easyui-tabs" data-options="fit:true">
+		<div title="个人下发违章违纪通知书" style="height:100%;">
+			<div id="dgtool" style="padding:5px;overflow: hidden;">
+				<a href="javascript:void(0)" onclick="openWin()" class="easyui-linkbutton normal">违章违纪数据录入</a>
+				<a id="exportBtn" href="javascript:void(0)" iconCls="icon-hamburg-down" class="easyui-linkbutton c1" onclick="exportData()">导出数据</a>
+				<span style="color:red;font-weight:bold;">注意：只允许修改24小时的记录！超过24小时的数据已归档，无法进行修改。</span>
+				<span style="float:right;">
+					<input id="key" class="easyui-textbox" data-options="buttonText:'查询',buttonAlign:'right',buttonIcon:'icon-search',prompt:'请输入查询关键字',onClickButton:searchByKey" style="width:220px;height:32px;">
+				</span>
+			</div>
+			<table id="dg"></table>
+		</div>
+	</div>
+</body>
+</html>
+<script src="layui/layui.js"></script>
+<script type="text/javascript" src="jsweb/wzwj.js?t=1" ></script>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="content-type" content="text/html; charset=UTF-8">
+		<title>全过程监控查询</title>
+		<link rel="stylesheet" href="css/main.css"/>
+		<link rel="stylesheet" href="layui/css/layui.css" media="all">
+		<style type="text/css">
+		.ulcss li{display:inline-block;margin-left:5px;margin-bottom:5px;}
+		</style>
+		<script type="text/javascript" src="jslib/jeasyui.js" ></script>
+	</head>
+<body>
+	<!-- 下载文件页面 -->
+	<iframe id="downloadFrame" style="display:none;width:0px;height:0px;"></iframe>
+	<div id="cxtool" style="padding:5px;overflow:hidden;">
+		<form id="myform" method="post">
+			<ul class="ulcss">
+				<li>起止日期：</li>
+					<li><input class="easyui-datebox" editable="false" id="ksrq" name="ksrq" style="width:110px;"></li>
+					<li>~</li>
+					<li><input class="easyui-datebox" editable="false" id="jsrq" name="jsrq" style="width:110px;"></li>
+					<li>作业项目：<input class="easyui-textbox" id="zyxm" name="zyxm" style="width:100px;"></li>
+					<li>车间：<select class="easyui-combobox" id="cj" name="cj" style="width:120px;"></select></li>
+					<li>工区：<select class="easyui-combobox" id="gq" name="gq" style="width:120px;"></select></li>
+					<li>驻站：<input class="easyui-textbox" id="zz" name="zz" style="width:60px;"/></li>
+					<li>现场：<input class="easyui-textbox" id="xc" name="xc" style="width:60px;"/></li>
+					<li>远端：<input class="easyui-textbox" id="yd" name="yd" style="width:60px;"/></li>
+					<li>反向远端：<input class="easyui-textbox" id="fxyd" name="fxyd" style="width:60px;"/></li>
+					<li>
+						<a href="javascript:void(0)" class="easyui-linkbutton c1" data-options="iconCls:'icon-search'" style="width:70px;" onclick="searchByCondition()">查询</a>
+						<a id="exportBtn" href="javascript:void(0)" iconCls="icon-hamburg-down" class="easyui-linkbutton c1" onclick="exportData()">导出数据</a>
+					</li>
+			</ul>
+			<!-- 
+			<table class="mytable">
+				<tr>
+					<td>起止日期：</td>
+					<td><input class="easyui-datebox" editable="false" id="ksrq" name="ksrq" style="width:110px;"></td>
+					<td>~</td>
+					<td><input class="easyui-datebox" editable="false" id="jsrq" name="jsrq" style="width:110px;"></td>
+					<td>作业项目：</td>
+					<td><input class="easyui-textbox" id="zyxm" name="zyxm" style="width:100px;"></td>
+					<td>车间：</td>
+					<td><select class="easyui-combobox" id="cj" name="cj" style="width:120px;"></select></td>
+					<td>工区：</td>
+					<td><select class="easyui-combobox" id="gq" name="gq" style="width:120px;"></select></td>
+					<td>驻站：</td>
+					<td><select class="easyui-textbox" id="zz" name="zz" style="width:60px;"></select></td>
+					<td>现场：</td>
+					<td><input class="easyui-textbox" id="xc" name="xc" style="width:60px;"></td>
+					<td>远端：</td>
+					<td><input class="easyui-textbox" id="yd" name="yd" style="width:60px;"></td>
+					<td>反向远端：</td>
+					<td><input class="easyui-textbox" id="fxyd" name="fxyd" style="width:60px;"></td>
+					<td>
+						<a href="javascript:void(0)" class="easyui-linkbutton c1" data-options="iconCls:'icon-search'" style="width:70px;" onclick="searchByCondition()">查询</a>
+						<a id="exportBtn" href="javascript:void(0)" iconCls="icon-hamburg-down" class="easyui-linkbutton c1" onclick="exportData()">导出数据</a>
+						<a href="javascript:void(0)" class="easyui-linkbutton normal" data-options="iconCls:'icon-search'">高级查询</a>
+					</td>
+				</tr>
+			</table>
+			 -->
+		</form>
+	</div>
+	<table id="dg-cx"></table>
+</body>
+</html>
+<script src="layui/layui.js"></script>
+<script type="text/javascript" src="jsweb/qgcjk_query.js?t=1" ></script>

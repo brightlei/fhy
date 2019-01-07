@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+          "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.zondy.hibernate.bean.PersonVo" table="T_PERSON" dynamic-insert="true">
+		<id name="id" column="id" type="java.lang.String">
+			<!-- 如果是自动增长的字段，则配置成increment -->
+			<!-- 如果是自动增长的字段，则配置成assigned -->
+			<!-- 如果是序列化的号，则配置成sequence,<param name='sequence'>序列名称</param>
+			<generator class="sequence">
+                <param name="sequence">SEQ_VISITOR</param>
+        	</generator>
+        	 -->
+		</id>
+		<property name="name" type="java.lang.String">
+			<column name="name">
+				<comment>姓名</comment>
+			</column>
+		</property>
+		<property name="namepy" type="java.lang.String">
+			<column name="namepy">
+				<comment>姓名拼音</comment>
+			</column>
+		</property>
+		<property name="sex" type="java.lang.String">
+			<column name="sex">
+				<comment>性别</comment>
+			</column>
+		</property>
+		<property name="age" type="java.lang.Integer">
+			<column name="age">
+				<comment>年龄</comment>
+			</column>
+		</property>
+		<property name="phone" type="java.lang.String">
+			<column name="phone">
+				<comment>手机号</comment>
+			</column>
+		</property>
+		<property name="zzmm" type="java.lang.String">
+			<column name="zzmm">
+				<comment>政治面貌</comment>
+			</column>
+		</property>
+		<property name="zm" type="java.lang.String">
+			<column name="zm">
+				<comment>职名</comment>
+			</column>
+		</property>
+		<property name="deptid" type="java.lang.Integer">
+			<column name="deptid">
+				<comment>部门ID</comment>
+			</column>
+		</property>
+		<property name="description" type="java.lang.String">
+			<column name="description" default="">
+				<comment>人员描述信息</comment>
+			</column>
+		</property>
+		<property name="headimg" type="java.lang.String">
+			<column name="headimg" default="">
+				<comment>人员头像地图</comment>
+			</column>
+		</property>
+		<property name="createtime" type="java.lang.String">
+			<column name="createtime" default="(datetime('now', 'localtime'))">
+				<comment>创建时间</comment>
+			</column>
+		</property>
+		<property name="edittime" type="java.lang.String">
+			<column name="edittime" default="(datetime('now', 'localtime'))">
+				<comment>修改时间</comment>
+			</column>
+		</property>
+		<property name="state" type="java.lang.Integer">
+			<column name="state" default="1">
+				<comment>记录状态:0-已删除，1-正常</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

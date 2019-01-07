@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<webconfig title="系统配置文件"> 
+<pjzbImportExcelField title="评价指标数据导入表格字段">id|pjtk|pf|qz1|qz2</pjzbImportExcelField>
+<!-- qgcjkImportExcelField title="全过程监控数据导入表格字段">id|zyrq|cj|gq|sd|bc|zyxm|xb|hangb|bgdd|zyqj|sdwz|xdwz|dnw|zg|lwg|sjsdrs|zyjj|zz|xc|yd|jhmlh|zyfzr|zydj|dbr|dbrsjh|dbzpxx|cjdk|cjdksj|cjdkzp|zddk|zddksj|zddkzp|zyry|tcmlh|sfapphf</qgcjkImportExcelField> -->
+<qgcjkImportExcelField title="全过程监控数据导入表格字段">gq|cj|jhzt|jhmlh|jhly|zyrq|zyfzr|bc|zylb|zydj|xm|hangb|zywz|dnw|rjhh|xj|zyxm|bgdd|zysd|yxfw|sdwz|xdwz|djz|zyqd|xcl|zg|lwg|dbr|jj|phdw|fgwphdw|bcsm|zz|xc|yd|zjllr|fxdj|gqlsrs|gqzbr|gqsbr|gqsbsj|cjdkr|cjspr|cjshsbsj|ddkr|dspr|dspsj</qgcjkImportExcelField>
+<fhyExcelField title="防护员数据导入字段配置">bh|xm|cj|gq|xb|age|sjh|zzmm|dqfhzg|cjpxsj</fhyExcelField>
+<personExcelField title="部门人员数据导入字段配置">id|name|sex|age|phone|zzmm|zm</personExcelField>
+<importExcelRowCount title="批量导入最大数据行">1000</importExcelRowCount>
+<wzxzScore>一般违章:2|D类违章:5|C类违章:20|B类违章:44|A类违章:350|安全管理红线:650|D类违标:5|C类违标:20|B类违标:44|A类违标:350|设备红线:650|违规（扣50元）:0.5|违规（扣100元）:1|违规（扣150元）:1.5|违规（扣200元）:2|违规（扣300元）:3</wzxzScore>
+<fhyMonthMoneyExportField title="防护员当月奖励分配结果导出表头字段">xm,cj,gq,xb,age,sjh,zzmm,dqfhzg,cjpxsj,bydf,ljjf,jl</fhyMonthMoneyExportField>
+<wxwjExportField title="违章违纪数据表格表头">wzwjbh:违章违纪编号|wzwjrq:违章违纪日期|fxdwmc:发现单位|fxrxm:发现人|wzlb:违章类别|wzxz:违章性质|wznr:违章内容|zrcj:责任车间|zrgq:责任工区|dnw:点内外|yjbt:夜间白天|wzwjfhy:主要责任人</wxwjExportField>
+<qgcjkExportField title="全过程监控数据表格表头">qgcjkbh:记录编号|zyrq:作业日期|cj:车间|gq:工区|jhly:计划来源|hangb:行别|dnw:点内外|bgdd:报地点|zyxm:作业项目|phtzs:配合通知书|phry:配合人员|sfyzjhxf:是否与周计划相符|bzxx:备注信息|dbr:带班人|lwg:劳务工|zgcqrs:职工出勤人数|zgcql:职工出勤率|shyjsl:手机应交数量|shsjsl:手机实交数量|sdrs:上道人数|xdrs:下道人数|sdl:上道率|zz_xm:驻站|xc_xm:现场|yd_xm:远端|fxyd_xm:反向远端|jwmh:进网命令号|cwmlh:出网命令号|wksbqk:网口锁闭情况|gwjjsyqk:高危机具使用情况|zzdgsj:驻站到岗时间|zzlgsj:驻站离岗时间|sjrwsj:实际入网时间|sjcwsj:实际出网时间|tdtc:图定天窗|tckssj:开窗开始时间|tcsjsj:开窗结束时间|sjzydd:实际作业地点|wcgzl:完成工作量|jcwjjsfyz:进出网机具是否一致|zbrs:值班人数|czwt:存在问题|clyj:处理意见</qgcjkExportField>
+<aaaa>报工地点=作业地点|作业项目=内容等级|职工出勤人数=职工|现场=工地|进网命令号=计划命令号|</aaaa>
+</webconfig>

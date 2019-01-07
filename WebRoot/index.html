@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="content-type" content="text/html; charset=UTF-8">
+		<title>防护员积分管理系统</title>
+		<link rel="stylesheet" href="css/main.css"/>
+		<style type="text/css">
+	.dataTable td{padding:10px;}
+    </style>
+		<script type="text/javascript" src="jslib/jeasyui.js" ></script>
+	</head>
+<body class="easyui-layout">
+	<!-- 个人账号密码修改 -->
+	<div id="divform" style="width:500px;">
+		<form id="myform" method="post">
+			<input type="hidden" id="action" name="action" value="updateUserPwd"/>
+			<table class="dataTable" border="1" bordercolor="#eeeeee" cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;">
+				<tr>
+					<td style="width:100px;text-align:right;">原密码：</td>
+					<td><input id="oldpwd" name="oldpwd" type="password" class="easyui-textbox" data-options="prompt:'请输入原密码',iconCls:'icon-lock',required:true" style="width:100%;height:36px;"></td>
+				</tr>
+				<tr>
+					<td style="text-align:right;">新密码：</td>
+					<td><input id="newpwd" name="newpwd" type="password" class="easyui-textbox" data-options="prompt:'请输入新密码',iconCls:'icon-lock',required:true" style="width:100%;height:36px;"></td>
+				</tr>
+				<tr>
+					<td style="text-align:right;">确认密码：</td>
+					<td><input id="newpwd2" name="newpwd2" type="password" class="easyui-textbox" data-options="prompt:'请输入确认密码',iconCls:'icon-lock',required:true" style="width:100%;height:36px;"></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<a id="btnSave" href="javascript:void(0)" class="easyui-linkbutton normal" data-options="iconCls:'icon-edit'" onclick="updatePwd()" style="height:36px;">修改密码</a>
+						<span id="msg"></span>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div id="northRegion" data-options="region:'north',border:false,collapsible:false" style="height:70px;background:#7ebcfb;padding:0px;overflow:hidden;">
+		<img src="images/header2.png" style="margin-top:-5px;display:none;"/>
+		<div id="div_calender" style="color:#fff;position:absolute;right:0px;top:1px;padding:2px 5px;font:15px 微软雅黑;font-weight:bold;"></div>
+		<div style="position:absolute;bottom:5px;right:5px;">
+			<span id="userinfo" style="color:#fff;font-weight:bold;"></span>
+			<a id="fav" href="javascript:addFavorite()" class="easyui-linkbutton" data-options="iconCls:'icon-cologne-star'">收藏本页</a>
+		    <a href="servlet/logout" class="easyui-linkbutton" data-options="toggle:true,iconCls:'icon-cologne-logout'">注销登录</a>
+        </div>
+	</div>
+	<div data-options="region:'center'">
+		<div id="tabtool" style="position:absolute;top:3px;right:5px;z-index:999;">
+			<!-- <a href="admin/index.html" class="easyui-linkbutton normal" target="_blank">后台管理</a> -->
+			<a title="刷新当前页面" id="btnReload" href="javascript:refreshTab()" class="easyui-linkbutton" data-options="iconCls:'icon-reload'"></a>
+			<a title="点击全屏" id="btnFull" href="javascript:setFullWin()" class="easyui-linkbutton" data-options="iconCls:'icon-standard-arrow-out'"></a>
+			<a style="display:none;" title="退出全屏" id="btnExitFull" href="javascript:exitFullWin()" class="easyui-linkbutton" data-options="iconCls:'icon-standard-arrow-in'"></a>
+		</div>
+		<div id="mytab" class="easyui-tabs" data-options="fit:true,onSelect:selectTab">
+			<!-- 
+			<div title="防护员积分" type="fhyjf">
+				<iframe id="fhy" name="fhy" frameborder="0" scrolling="0" style="width: 100%;height:100%;" src="fhyjf.html"></iframe>
+			</div>
+			<div title="违章违纪录入" type="wzwj"></div>
+			<div title="违章违纪查询" type="wzwj"></div>
+			<div title="全过程监控录入" type="qgcjk"></div>
+			<div title="全过程监控查询" type="qgcjk"></div>
+			 -->
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="jslib/Calender.js"></script>
+<script type="text/javascript" src="layer/layer.js" ></script>
+<script type="text/javascript" src="layer/layer-common.js" ></script>
+<script type="text/javascript" src="jsweb/index.js" ></script>

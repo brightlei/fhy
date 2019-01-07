@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="content-type" content="text/html; charset=UTF-8">
+		<title>防护员积分详情</title>
+		<link rel="stylesheet" href="css/main.css"/>
+		<style type="text/css">
+		.divpanel{width:100%;height:33.3%;background:red;}
+		.score{font-size:55px;font-weight:bold;color:blue;text-align:center;}
+		.green{color:#6BDC4C;}
+		.blue{color:blue;}
+		.red{color:red;}
+		</style>
+		<script type="text/javascript" src="jslib/jeasyui.js" ></script>
+	</head>
+<body class="easyui-layout">
+	<div data-options="region:'west',border:false,collapsible:false,title:'个人积分详情'" style="width:200px;padding:5px;">
+		<div class="divpanel">
+			<div class="easyui-panel" title="本月得分" data-options="fit:true">
+				<table style="width:100%;height:100%;"><tr><td id="bydf" class="score green">0</td></tr></table>
+			</div>
+		</div>
+		<div class="divpanel">
+			<div class="easyui-panel" title="本月加分" data-options="fit:true">
+				<table style="width:100%;height:100%;"><tr><td id="jftotal" class="score blue">0</td></tr></table>
+			</div>
+		</div>
+		<div class="divpanel">
+			<div class="easyui-panel" title="本月扣分" data-options="fit:true">
+				<table style="width:100%;height:100%;"><tr><td id="kftotal" class="score red">0</td></tr></table>
+			</div>
+		</div>
+	</div>
+	<div data-options="region:'center',border:false">
+		<div class="easyui-layout" style="width:100%;height:100%;">
+			<div data-options="region:'north',collapsible:false" style="height:50%;padding:0px;">
+				<table id="dg-jf"></table>
+			</div>
+			<div data-options="region:'center'">
+				<table id="dg-kf"></table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="jsweb/jftj.js" ></script>

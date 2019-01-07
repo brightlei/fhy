@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs title="SQL语句配置">
+<!-- 后台管理开始 -->
+<queryDic title="查询字典分类信息">select id,code,name from T_DIC</queryDic>
+<queryDicData title="查询字典分类下的字典数据">select * from T_DICDATA where diccode='#diccode#' order by rank</queryDicData>
+<addDicData title="添加数据字典">insert into T_DICDATA(diccode,code,name,rank) values('#diccode#','#code#','#name#','#rank#')</addDicData>
+<editDicData title="修改数据字典">update T_DICDATA set name='#name#',rank='#rank#',edittime=(datetime('now', 'localtime')) where id='#id#'</editDicData>
+<deleteDicData title="删除数据字典">delete from T_DICDATA where id='#id#'</deleteDicData>
+<queryDept title="查询部门信息">select * from T_DEPT</queryDept>
+<queryDeptAndPersonCount title="查询部门及部门下人员信息">select t.*,ifnull(t1.pcount,0) as pcount from T_DEPT t left join (select deptid,count(1) as pcount from T_PERSON group by deptid) t1 on t.id=t1.deptid</queryDeptAndPersonCount>
+<addDept title="添加部门信息">insert into T_DEPT(code,name,pid,rank) values('#code#','#name#','#pid#','#rank#')</addDept>
+<editDept title="修改部门名称">update T_DEPT set name='#name#',rank='#rank#' where id='#id#'</editDept>
+<deleteDept title="删除部门名称">delete from T_DEPT where id='#id#'</deleteDept>
+<queryDeptPerson title="查询部门下的直属人员">select *,t1.name as deptname from T_PERSON t,T_DEPT t1 where t.deptid=t1.id and t.deptid='#deptid#'</queryDeptPerson>
+<addDeptPerson title="添加部门人员">insert into T_PERSON(id,name,namepy,sex,age,phone,zzmm,deptid,zm,description,headimg) values('#id#','#name#','#namepy#','#sex#','#age#','#phone#','#zzmm#','#deptid#','#zm#','#description#','#userimg#')</addDeptPerson>
+<editDeptPerson title="修改部门人员">update T_PERSON set name='#name#',namepy='#namepy#',sex='#sex#',age='#age#',phone='#phone#',zzmm='#zzmm#',zm='#zm#',description='#description#',headimg='#userimg#' where id='#id#'</editDeptPerson>
+<deletePerson title="删除部门人员">delete from T_PERSON where id='#id#'</deletePerson>
+<checkPersonExist title="检测部门人员是否已存在">select t1.id,t1.name,t1.sex,t1.age,t2.name as deptname from T_PERSON t1,T_DEPT t2 where t1.deptid=t2.id and t1.id='#id#'</checkPersonExist>
+<loadNoUserPerson title="获取还未注册的人员">select t.id,t.name,t.sex,t.phone,t.zzmm,t2.name as deptname from T_PERSON t,T_DEPT t2 where t.deptid=t2.id and t.id not in (select personid from T_USER)</loadNoUserPerson>
+<getUserData title="获取用户信息列表">select t.id,t.username,t.roleid,t2.name,t2.sex,t2.phone,t2.zzmm,t.createtime,t.edittime,t3.name as rolename,t4.name as deptname from T_USER t,T_PERSON t2,T_ROLE t3,T_DEPT t4 where t.personid=t2.id and t.roleid=t3.id and t2.deptid=t4.id</getUserData>
+<deleteUser>delete from T_USER where id='#id#'</deleteUser>
+<queryRole>select * from T_ROLE</queryRole>
+<queryPjzb title="查询评价指标">select * from T_PJZB</queryPjzb>
+<addPjzb title="添加评价指标">insert into T_PJZB(name,pid,zbgs) values('#name#','#pid#','#zbgs#')</addPjzb>
+<editPjzb title="修改评价指标">update T_PJZB set name='#name#',zbgs='#zbgs#' where id='#id#'</editPjzb>
+<deletePjzb title="删除评价指标">delete from T_PJZB where id='#id#'</deletePjzb>
+<addPjzbData title="添加评价指标评分项">insert into T_PJZB_DATA(zbid,pjtk,pf,qz1,qz2) values('#zbid#','#pjtk#','#pf#','#qz1#','#qz2#')</addPjzbData>
+<editPjzbData title="修改评价指标评分项">update T_PJZB_DATA set pjtk='#pjtk#',pf='#pf#',qz1='#qz1#',qz2='#qz2#' where id='#pjzbdataid#'</editPjzbData>
+<deletePjzbData title="删除评价指标评分项">delete from T_PJZB_DATA where id in (#ids#)</deletePjzbData>
+<queryPjzbData title="查询评价指标评分列表">select * from T_PJZB_DATA where zbid='#zbid#'</queryPjzbData>
+<addRoleRight title="添加权限信息">insert into t_roleright(name,pid,pageurl) values('#name#','#pid#','')</addRoleRight>
+<editRoleRight title="修改权限信息">update t_roleright set name='#name#',pageurl='#pageurl#',operate='#operate#' where id='#id#' and code='#code#'</editRoleRight>
+<deleteRoleRight title="删除权限信息">delete from t_roleright where id='#id#' and code='#code#'</deleteRoleRight>
+<getRoleRight title="获取菜单权限信息">select id,name,pid,pageurl,iconcls from T_ROLERIGHT</getRoleRight>
+<editRoleRight>update T_ROLERIGHT set name='#name#',pageurl='#pageurl#' where id='#id#'</editRoleRight>
+<addRole title="添加角色信息">insert into t_role(name,pageright,dataright) values('#name#','','')</addRole>
+<deleteRole title="删除角色">delete from t_role where id='#id#'</deleteRole>
+<savePageRole title="保存用户页面权限">update t_role set pageright='#pageright#' where id='#id#'</savePageRole>
+<saveDataRole title="保存用户数据权限">update t_role set dataright='#dataright#' where id='#id#'</saveDataRole>
+<setUserRole title="设置用户角色">update t_user set roleid='#roleid#',edittime=(datetime('now', 'localtime')) where id='#id#'</setUserRole>
+<addUser title="添加系统用户">insert into T_USER(username,userpwd,personid,roleid) values('#user_name#','123456','#personid#','#roleid#')</addUser>
+<getUserInfo title="获取用户信息">select * from T_USER where username='#username#'</getUserInfo>
+<updateUserPwd title="修改用户密码">update t_user set userpwd='#newpwd#' where username='#username#'</updateUserPwd>
+<getVisitLogCount>select count(1) from T_VISIT_LOG</getVisitLogCount>
+<getVisitLog>select * from T_VISIT_LOG order by id desc</getVisitLog>
+<getUserOplogCount title="查询用户操作日志总记录数">select count(1) from T_USER_OPLOG t where t.createtime between '#stime#' and '#etime#' </getUserOplogCount>
+<getUserOplog title="查询用户操作日志">select t.*,t2.name as userxm from T_USER_OPLOG t,T_USER t1,T_PERSON t2 where t.username=t1.username and t1.personid=t2.id and t.createtime between '#stime#' and '#etime#' order by t.createtime desc</getUserOplog>
+<saveUserOplog title="保存用户操作日志">insert into T_USER_OPLOG(ip,username,name,optype,opcontent) values('#ip#','#username#','#name#','#optype#','#opcontent#')</saveUserOplog>
+<!-- 后台管理结束 -->
+<!-- <checkLogin title="检查用户登录">select t.id,t.username,t.userpwd,t.personid,t.roleid,t1.name as xm,t1.sex,t1.deptid,t2.name as rolename,t2.pageright,t2.dataright from T_USER t,T_PERSON t1,T_ROLE t2 where t.personid=t1.id and t.roleid=t2.id and username='#username#'</checkLogin> -->
+<checkLogin title="检查用户登录">select t.id,username,userpwd,personid,roleid,t1.name as xm,t1.sex,t1.deptid,t2.name as rolename,t2.pageright,t2.dataright from T_USER t left join T_PERSON t1 on t.personid=t1.id left join T_ROLE t2 on t.roleid=t2.id where t.username='#username#'</checkLogin>
+<getAllDic title="获取所有字典项">select t.id,t.diccode as dictype,t1.name as dicname,t.code,t.name,t.rank from T_DICDATA t,T_DIC t1 where t.diccode=t1.code order by t.diccode,t.rank</getAllDic>
+<insertFhy title="保存防护员信息">insert into T_FHY(id,xm,cj,gq,xb,age,sjh,zzmm,dqfhzg,cjpxsj) values('#primaryKey#','#xm#','#cj#','#gq#','#xb#','#age#','#sjh#','#zzmm#','#dqfhzg#','#cjpxsj#')</insertFhy>
+<getfhy title="查询防护员信息">select * from T_FHY</getfhy>
+<deleteFhy title="删除防护员">delete from T_FHY where bh in(#ids#)</deleteFhy>
+<editFhy title="修改防护员">update T_FHY set xm='#form-xm#',cj='#form-cj#',gq='#form-gq#',age='#form-age#',xb='#form-xb#',sjh='#form-sjh#',zzmm='#form-zzmm#',dqfhzg='#form-dqfhzg#',cjpxsj='#form-cjpxsj#' where id='#id#'</editFhy>
+<queryFhyByKey title="通过查询关键字查询防护员">select * from T_FHY where xm like '%#key#%' or cj like '%#key#%' or gq like '%#key#%'  or xb like '%#key#%' or age like '#key#' or sjh like '%#key#%' or zzmm like '%#key#%' or dqfhzg like '%#key#%' or cjpxsj like '%#key#%' order by bh</queryFhyByKey>
+<queryFhyByCondition title="通过各种条件查询防护员信息">select * from T_FHY where xm like '%#xm#%' and cj like '%#cj#%' and gq like '%#gq#%'  and xb like '%#sex#%' and sjh like '%#sjh#%' and zzmm like '%#zzmm#%' and #condition#</queryFhyByCondition>
+<getfhycount title="查询防护员信息总数">select count(1) from T_FHY</getfhycount>
+<getfhyScore title="查询防护员积分信息">select t.*,t2.bydf,t1.ljjf from T_FHY t left join VIEW_FHY_TOTALSCORE t1 on t.bh=t1.fhybh left join (select fhybh,sum(jiafen-jianfen) as bydf from T_FHY_SCORE where year='#year#' and month='#month#' group by fhybh) t2 on t.bh=t2.fhybh</getfhyScore>
+<getfhyScoreCount title="查询防护员积分信息总数">select count(1) from T_FHY</getfhyScoreCount>
+<queryFhyScoreMoney title="防护员积分奖励查询">select t.*,ifnull(t2.bydf,0) as bydf,ifnull(t1.ljjf,0) as ljjf,ifnull(t3.dyjl,0) as jl from T_FHY t left join VIEW_FHY_TOTALSCORE t1 on t.bh=t1.fhybh left join (select fhybh,sum(jiafen-jianfen) as bydf from T_FHY_SCORE where year='#year#' and month='#month#' group by fhybh) t2 on t.bh=t2.fhybh left join (select fhybh,dyjl from T_FHY_MONTH_MONEY where year='#year#' and month='#month#') t3 on t.bh=t3.fhybh where cj like '%#cj#%' and gq like '%#gq#%' and xb like '%#sex#%' and zzmm like '%#zzmm#%' and age between '#qsnl#' and '#zznl#' order by bydf desc,ljjf desc</queryFhyScoreMoney>
+<getFhyScoreMoney title="获取防护员积分分配奖励-按积分排序">select t.*,ifnull(t2.bydf,0) as bydf,ifnull(t1.ljjf,0) as ljjf,ifnull(t3.dyjl,0) as jl from T_FHY t left join VIEW_FHY_TOTALSCORE t1 on t.bh=t1.fhybh left join (select fhybh,sum(jiafen-jianfen) as bydf from T_FHY_SCORE where year='#year#' and month='#month#' group by fhybh) t2 on t.bh=t2.fhybh left join (select fhybh,dyjl from T_FHY_MONTH_MONEY where year='#year#' and month='#month#') t3 on t.bh=t3.fhybh where bydf>0 order by bydf desc</getFhyScoreMoney>
+<exportFhyMonthMoney title="导出防护员当月奖励分配结果">select t.*,ifnull(t2.bydf,0) as bydf,ifnull(t1.ljjf,0) as ljjf,ifnull(t3.dyjl,0) as jl from T_FHY t left join VIEW_FHY_TOTALSCORE t1 on t.bh=t1.fhybh left join (select fhybh,sum(jiafen-jianfen) as bydf from T_FHY_SCORE where year='#year#' and month='#month#' group by fhybh) t2 on t.bh=t2.fhybh left join (select fhybh,dyjl from T_FHY_MONTH_MONEY where year='#year#' and month='#month#') t3 on t.bh=t3.fhybh where bydf>0 and jl>0 order by bydf desc</exportFhyMonthMoney>
+<deleteMonthFhyMoney title="删除当月防护员奖励分配结果">delete from T_FHY_MONTH_MONEY where year='#year#' and month='#month#'</deleteMonthFhyMoney>
+<saveMonthFhyMoney title="保存当月防护员积分奖励分配结果">insert into T_FHY_MONTH_MONEY(year,month,fhybh,dyjl) values('#year#','#month#','#fhybh#','#dyjl#')</saveMonthFhyMoney>
+<loadCjGqFhy title="加载车间工区下的防护员">select bh,xm,xb,age,zzmm from T_FHY where cj='#cj#' and gq='#gq#'</loadCjGqFhy>
+<loadCjGqPerson title="加载车间工区所有人员">select * from VIEW_ALL_PERSON where bh!='admin' and cj='#cj#' and gq='#gq#' order by zmlx</loadCjGqPerson>
+<loadUserWzwjCount title="获取自己录入违章违纪总数">select count(1) from T_WZWJ where opuser='#username#'</loadUserWzwjCount>
+<loadUserWzwj title="加载违章违纪数据">select t.*,t1.fxrinfo as fxrinfo,t2.wzwjfhy as wzwjfhy,t3.name as fxdwmc,(julianday('now','localtime')-julianday(cjsj)) as timespace from T_WZWJ t,view_WZWJ_FXRINFO t1,view_WZWJ_FHY t2,T_DEPT t3 where t.wzwjbh=t1.wzwjbh and t.wzwjbh=t2.wzwjbh and t.fxdw=t3.id and opuser='#username#'</loadUserWzwj>
+<addWzwj title="添加违章违纪">insert into T_WZWJ(wzwjbh,wzwjrq,fxdw,fxr,wzlb,wzxz,wznr,zrcj,zrgq,dnw,yjbt,zyzrr,opuser) values('#wzwjbh#','#wzwjrq#','#fxdw#','#fxr#','#wzlb#','#wzxz#','#wznr#','#cj#','#gq#','#dnw#','#yjbt#','#zyzrr#','#username#')</addWzwj>
+<updateWzwj title="修改违章违纪信息">update T_WZWJ set wzwjrq='#wzwjrq#',fxdw='#fxdw#',fxr='#fxr#',wzlb='#wzlb#',wzxz='#wzxz#',wznr='#wznr#',zrcj='#cj#',zrgq='#gq#',dnw='#dnw#',yjbt='#yjbt#',zyzrr='#zyzrr#' where wzwjbh='#wzwjbh#'</updateWzwj>
+<addWzwjFxr title="添加违章违纪发现人">insert into T_WZWJ_FXR(wzwjbh,fxdwid,fxrid) values('#wzwjbh#','#fxdwid#','#fxrid#')</addWzwjFxr>
+<addWzwjFhy title="添加违章违纪防护员">insert into T_WZWJ_FHY(wzwjbh,wzwjrq,fhybh,score,isfhy) values('#wzwjbh#','#wzwjrq#','#fhybh#','#score#','#isfhy#')</addWzwjFhy>
+<deleteWzwj title="删除违章违纪数据">delete from T_WZWJ where wzwjbh='#wzwjbh#'</deleteWzwj>
+<deleteWzwjFhy title="删除违章违纪防护员">delete from T_WZWJ_FHY where wzwjbh='#wzwjbh#'</deleteWzwjFhy>
+<deleteWzwjFxr title="删除违章违纪发现人">delete from T_WZWJ_FXR where wzwjbh='#wzwjbh#'</deleteWzwjFxr>
+<queryWzwjByKey title="通过查询关键字查询违章违纪数据">select * from (select t.*,t1.fxrinfo as fxrinfo,t2.wzwjfhy as wzwjfhy,t3.name as fxdwmc from T_WZWJ t,view_WZWJ_FXRINFO t1,view_WZWJ_FHY t2,T_DEPT t3 where t.wzwjbh=t1.wzwjbh and t.wzwjbh=t2.wzwjbh and t.fxdw=t3.id and opuser='#username#') where wzwjrq like '%#key#%' or wzlb like '%#key#%' or wzxz like '%#key#%' or wznr like '%#key#%' or zrcj like '%#key#%' or zrgq like '%#key#%' or dnw like '%#key#%' or yjbt like '%#key#%' or fxrinfo like '%#key#%' or wzwjfhy like '%#key#%' or fxdwmc like '%#key#%'</queryWzwjByKey>
+<!-- <queryWzwjByCondition title="根据条件查询违章违纪">select * from VIEW_WZWJ t where wzwjrq between '#ksrq#' and '#jsrq#' and fxdw like '%#fxdw#%' and fxrxm like '%#fxr#%' and wzlb like '%#wzlb#%' and wzxz like '%#wzxz#%' and wznr like '%#wznr#%' and zrcj like '%#cj#%' and zrgq like '%#gq#%' and dnw like '%#dnw#%' and yjbt like '%#yjbt#%' and zyzrr like '%#zyzrr#%'</queryWzwjByCondition> -->
+<queryWzwjByCondition title="">select t.*,t1.fxrinfo as fxrinfo,t4.fxrxm as fxrxm,t2.wzwjfhy as wzwjfhy,t2.wzwjfhyinfo as wzwjfhyinfo,t3.name as fxdwmc from T_WZWJ t,view_WZWJ_FXRINFO t1,view_WZWJ_FHY t2,T_DEPT t3,VIEW_WZWJ_FXRGROUP t4 where t.wzwjbh=t1.wzwjbh and t.wzwjbh=t2.wzwjbh and t.wzwjbh=t4.wzwjbh and t.fxdw=t3.id and wzwjrq between '#ksrq#' and '#jsrq#' and fxdw like '%#fxdw#%' and fxrinfo like '%#fxr#%' and wzlb like '%#wzlb#%' and wzxz like '%#wzxz#%' and wznr like '%#wznr#%' and zrcj like '%#cj#%' and zrgq like '%#gq#%' and dnw like '%#dnw#%' and yjbt like '%#yjbt#%' and wzwjfhy like '%#zyzrr#%' and wzwjfhyinfo like '%#zzmm#%' and wzwjfhyinfo like '%#zm#%'</queryWzwjByCondition>
+<queryQgcjkByCondition title="根据条件查询全过程监控">select * from VIEW_QGCJK t where zyrq between '#ksrq#' and '#jsrq#' and zyxm like '%#zyxm#%' and cj like '%#cj#%' and gq like '%#gq#%' and zz like '%#zz#%' and xc like '%#xc#%' and yd like '%#yd#%' and fxyd like '%#fxyd#%'</queryQgcjkByCondition>
+<loadQgcjkCount>select count(1) from VIEW_QGCJK where (zyrq like '%#key#%'or cj like '%#key#%' or gq like '%#key#%' or jhly like '%#key#%' or hangb like '%#key#%' or dnw like '%#key#%' or bgdd like '%#key#%' or zyxm like '%#key#%' or phtzs like '%#key#%' or phry like '%#key#%' or dbr like '%#key#%' or lwg like '%#key#%' or zz_xm like '%#key#%' or yd_xm like '%#key#%' or xc_xm like '%#key#%' or fxyd_xm like '%#key#%' or jwmlh like '%#key#%' or cwmlh like '%#key#%' or gwjjsyqk like '%#key#%' or sjzydd like '%#key#%' or czwt like '%#key#%' or clyj like '%#key#%') and opuser='#username#'</loadQgcjkCount>
+<loadQgcjk title="获取全过程监控数据">select * from VIEW_QGCJK where (zyrq like '%#key#%'or cj like '%#key#%' or gq like '%#key#%' or jhly like '%#key#%' or hangb like '%#key#%' or dnw like '%#key#%' or bgdd like '%#key#%' or zyxm like '%#key#%' or phtzs like '%#key#%' or phry like '%#key#%' or dbr like '%#key#%' or lwg like '%#key#%' or zz_xm like '%#key#%' or yd_xm like '%#key#%' or xc_xm like '%#key#%' or fxyd_xm like '%#key#%' or jwmlh like '%#key#%' or cwmlh like '%#key#%' or gwjjsyqk like '%#key#%' or sjzydd like '%#key#%' or czwt like '%#key#%' or clyj like '%#key#%') and opuser='#username#'</loadQgcjk>
+<saveFhyScore title="保存防护员积分信息">insert into T_FHY_SCORE(jfbh,year,month,date,fhybh,jiafen,jianfen) values('#jfbh#','#year#','#month#','#date#','#fhybh#','#jiafen#','#jianfen#')</saveFhyScore>
+<deleteFhyScore title="删除防护员积分信息">delete from T_FHY_SCORE where jfbh='#jfbh#'</deleteFhyScore>
+<saveQgcjk title="保存全过程监控数据">insert into T_QGCJK(qgcjkbh,zyrq,cj,gq,jhly,hangb,dnw,bgdd,zyxm,phtzs,phry,sfyzjhxf,bzxx,dbr,lwg,zgcqrs,zgcql,shyjsl,shsjsl,sdrs,xdrs,sdl,zz,xc,yd,fxyd,jwmlh,cwmlh,wksbqk,gwjjsyqk,zzdgsj,zzlgsj,sjrwsj,sjcwsj,tdtc,tckssj,tcsjsj,sjzydd,wcgzl,jcwjjsfyz,zbrs,czwt,clyj,sjzt,opuser) values('#qgcjkbh#','#zyrq#','#cj#','#gq#','#jhly#','#hangb#','#dnw#','#bgdd#','#zyxm#','#phtzs#','#phry#','#sfyzjhxf#','#bzxx#','#dbr#','#lwg#','#zgcqrs#','#zgcql#','#shyjsl#','#shsjsl#','#sdrs#','#xdrs#','#sdl#','#zz#','#xc#','#yd#','#fxyd#','#jwmlh#','#cwmlh#','#wksbqk#','#gwjjsyqk#','#zzdgsj#','#zzlgsj#','#sjrwsj#','#sjcwsj#','#tdtc#','#tckssj#','#tcsjsj#','#sjzydd#','#wcgzl#','#jcwjjsfyz#','#zbrs#','#czwt#','#clyj#','2','#opuser#');</saveQgcjk>
+<importQgcjk title="导入日计划作为全过程监控数据">insert into T_QGCJK(qgcjkbh,zyrq,cj,gq,jhly,hangb,dnw,bgdd,zyxm,phtzs,phry,sfyzjhxf,bzxx,dbr,lwg,zgcqrs,zgcql,shyjsl,shsjsl,sdrs,xdrs,sdl,zz,xc,yd,fxyd,jwmlh,cwmlh,wksbqk,gwjjsyqk,zzdgsj,zzlgsj,sjrwsj,sjcwsj,tdtc,tckssj,tcsjsj,sjzydd,wcgzl,jcwjjsfyz,zbrs,czwt,clyj,sjzt,opuser) values('#qgcjkbh#','#zyrq#','#cj#','#gq#','#jhly#','#hangb#','#dnw#','#bgdd#','#zyxm#','','','是','','#dbr#','#lwg#','#zg#','0','0','0','0','0','0','#zz#','#xc#','#yd#','','#jhmlh#','','无','','#zzdgsj#','#zzlgsj#','#sjrwsj#','#sjcwsj#','','#tckssj#','#tcsjsj#','','','是','0','','','1','#opuser#');</importQgcjk>
+<editQgcjk title="修改全过程监控数据">update T_QGCJK set zyrq='#zyrq#',cj='#cj#',gq='#gq#',jhly='#jhly#',hangb='#hangb#',dnw='#dnw#',bgdd='#bgdd#',zyxm='#zyxm#',phtzs='#phtzs#',phry='#phry#',sfyzjhxf='#sfyzjhxf#',bzxx='#bzxx#',dbr='#dbr#',lwg='#lwg#',zgcqrs='#zgcqrs#',zgcql='#zgcql#',shyjsl='#shyjsl#',shsjsl='#shsjsl#',sdrs='#sdrs#',xdrs='#xdrs#',sdl='#sdl#',zz='#zz#',xc='#xc#',yd='#yd#',fxyd='',jwmlh='',cwmlh='',wksbqk='无',gwjjsyqk='',zzdgsj='#zzdgsj#',zzlgsj='#zzlgsj#',sjrwsj='#sjrwsj#',sjcwsj='#sjcwsj#',tdtc='#tdtc#',tckssj='#tckssj#',tcsjsj='#tcsjsj#',sjzydd='#sjzydd#',wcgzl='#wcgzl#',jcwjjsfyz='#jcwjjsfyz#',zbrs='#zbrs#',czwt='#czwt#',clyj='#clyj#',xgsj=(datetime('now', 'localtime')),sjzt='2' where qgcjkbh='#qgcjkbh#'</editQgcjk>
+<deleteQgcjk title="删除全过程监控">delete from T_QGCJK where qgcjkbh='#qgcjkbh#'</deleteQgcjk>
+<deleteQgcjkFhy title="删除全过程监控">delete from T_QGCJK_FHY where qgcjkbh='#qgcjkbh#'</deleteQgcjkFhy>
+<getKouFenRecord title="获取人员扣分项目">select t.*,t1.score,t2.name as fxdwmc from T_WZWJ t,T_WZWJ_FHY t1,T_DEPT t2,T_FHY t3 where t.wzwjbh=t1.wzwjbh and t.fxdw=t2.id and t1.fhybh=t3.bh and t3.xm='#xm#'</getKouFenRecord>
+<saveQgcjkFhy title="保存防护员全过程监控数据">insert into T_QGCJK_FHY(qgcjkbh,zyrq,cj,gq,fhylb,fhybh,stime,etime,score) values('#qgcjkbh#','#zyrq#','#cj#','#gq#','#fhylb#','#fhybh#','#stime#','#etime#','#score#')</saveQgcjkFhy>
+<queryQgcjkScoreExist title="判断全过程监控防护员积分表中是否已经计算过得分">select * from T_QGCJK_FHY where zyrq='#zyrq#' and fhylb='#fhylb#' and fhybh='#fhybh#' and stime='#stime#' and etime='#etime#'</queryQgcjkScoreExist>
+<getJiaFenRecord title="获取防护员加分记录">select t.zyrq,t.cj,t.gq,t.zz,t.yd,t.xc,t.fxyd,t.zzdgsj,t.zzlgsj,t.sjrwsj,t.sjcwsj,t1.score from T_QGCJK t,T_QGCJK_FHY t1,VIEW_ALL_PERSON t2 where t.qgcjkbh=t1.qgcjkbh and t1.fhybh=t2.bh and t1.fhybh='#bh#'</getJiaFenRecord>
+<getAllPerson title="获取所有人员信息">select bh,xm,xb,age,sjh,zzmm,zm from VIEW_ALL_PERSON</getAllPerson>
+</configs>

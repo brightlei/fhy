@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="content-type" content="text/html; charset=UTF-8">
+		<title>防护员基本信息</title>
+		<link rel="stylesheet" href="css/main.css"/>
+		<link rel="stylesheet" href="layui/css/layui.css" media="all">
+		<style type="text/css">
+		.mytable td{padding-left:5px;}
+		</style>
+		<script type="text/javascript" src="jslib/jeasyui.js" ></script>
+	</head>
+<body class="easyui-layout">
+	<div data-options="region:'center',title:'防护员数据列表'">
+		<div id="tools" style="padding:5px;overflow:hidden;">
+			<a href="template/防护员信息表-Template.xls" class="easyui-linkbutton c1">数据导入表格模板下载</a>
+			<a id="btn_upload" href="javascript:void(0)" class="easyui-linkbutton normal">批量导入数据</a>
+			<span style="color:red;">说明：先下载数据表格模板文件，然后按示例数据填写数据，再点击“批量导入数据”选择填写数据的表格文件。</span>
+			<span style="float:right;">
+				<input id="key" class="easyui-textbox" data-options="buttonText:'查询',buttonAlign:'right',buttonIcon:'icon-search',prompt:'请输入查询关键字',onClickButton:searchByKey" style="width:220px;height:32px;">
+				<a href="javascript:showCondition('show')" class="easyui-linkbutton normal" data-options="iconCls:'icon-search'">高级查询</a>
+			</span>
+			<div id="querybox" style="display:none;position:absolute;left:0px;top:0px;z-index:999;width:100%;padding:5px;height:32px;background:#F5F5F5;">
+				<form id="myform" method="post">
+					<table class="mytable">
+						<tr>
+							<td>姓名：</td>
+							<td><input class="easyui-textbox" id="xm" name="xm" style="width:70px;"></td>
+							<td>车间：</td>
+							<td><select class="easyui-combobox" id="cj" name="cj" style="width:130px;"></select></td>
+							<td>工区：</td>
+							<td><select class="easyui-combobox" id="gq" name="gq" style="width:130px;"></select></td>
+							<td>性别：</td>
+							<td>
+								<select class="easyui-combobox" data-options="onShowPanel:onShowComboPanel" id="sex" name="sex" style="width:80px;">
+									<option value="">请选择</option>
+									<option value="男">男</option>
+									<option value="女">女</option>
+								</select>
+							</td>
+							<td>政治面貌：</td>
+							<td><select class="easyui-combobox" id="zzmm" name="zzmm" style="width:80px;"></select></td>
+							<td>手机号：</td>
+							<td><input class="easyui-textbox" id="sjh" name="sjh" style="width:90px;"></td>
+							<td>年龄段：</td>
+							<td><input id="minage" name="minage" class="easyui-numberbox" data-options="onChange:numberChange" style="width:50px;" precision="0" min=16 max=70></td>
+							<td>~</td>
+							<td><input id="maxage" name="maxage" class="easyui-numberbox" data-options="onChange:numberChange" style="width:50px;" precision="0" min=16 max=70></td>
+							<td><a href="javascript:void(0)" class="easyui-linkbutton normal" data-options="iconCls:'icon-search'" style="width:70px;" onclick="searchByCondition()">查询</a></td>
+							<td><a href="javascript:showCondition('hide')" class="easyui-linkbutton c2" data-options="iconCls:'icon-back'">返回</a></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+		<table id="dg"></table>
+	</div>
+</body>
+</html>
+<script src="layui/layui.js"></script>
+<script type="text/javascript" src="jsweb/fhy.js" ></script>
+
