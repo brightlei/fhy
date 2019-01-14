@@ -185,6 +185,7 @@ public class FhyScoreImpl {
 				List<String> sqlList = new ArrayList<String>();
 				//获取所有人员信息
 				List<?> personList = loadAllPerson();
+				List<String> noParamList = new ArrayList<String>();
 				//头部就两行，从2开始数据导入
 				for(int i=2;i<count;i++){
 					rowList = dataList.get(i);
@@ -213,6 +214,14 @@ public class FhyScoreImpl {
 							sqlParam.put("xc", getPersonBhString(personList, sqlParam.getString("xc")));
 							sqlParam.put("yd", getPersonBhString(personList, sqlParam.getString("yd")));
 							sqlParam.put("fxyd", getPersonBhString(personList, sqlParam.getString("fxyd")));
+							//20190110-将“计划作业地点”、“作业项目”项填入后面的“实际作业地点”、“完成工作量”中。这样人员在上报中可少量编辑即可完成
+							sqlParam.put("sjzydd", sqlParam.getString("bgdd"));
+							sqlParam.put("wcgzl", sqlParam.getString("zyxm"));
+							sql = sqlxml.getParamConfig("importQgcjk", sqlParam);
+							noParamList = getSqlParam(sql);
+							for(int x=0;x<noParamList.size();x++){
+								sqlParam.put(noParamList.get(x), "");
+							}
 							sql = sqlxml.getParamConfig("importQgcjk", sqlParam);
 							sqlList.add(sql);
 						}
@@ -285,6 +294,34 @@ public class FhyScoreImpl {
 		return isnull;
 	}
 	
+	/**
+	 * 检查SQL语句中是否有未替换的参数.<br>
+	 * @param sql SQL语句
+	 * @return List<String> 参数集合
+	 */
+	public static List<String> getSqlParam(String sql){
+		int length = 0;
+		if(sql!=null){
+			length = sql.length();
+		}
+		List<String> list = new ArrayList<String>();
+		List<Integer> indexList = new ArrayList<Integer>();
+		for(int i=0;i<length;i++){
+			if(sql.charAt(i)=='#'){
+				indexList.add(i);
+			}
+		}
+		String param = "";
+		int firstIndex = 0;
+		int nextIndex = 0;
+		for(int i=0;i<indexList.size()-1;i=i+2){
+			firstIndex = indexList.get(i);
+			nextIndex = indexList.get(i+1);
+			param = sql.substring(firstIndex+1, nextIndex);
+			list.add(param);
+		}
+		return list;
+	}
 	
 	public static int importPjzbData(String filepath,String zbid) throws FileNotFoundException, IOException{
 		int successCount = 0;
