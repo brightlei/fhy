@@ -3,7 +3,7 @@
 <webconfig title="系统配置文件"> 
 <pjzbImportExcelField title="评价指标数据导入表格字段">id|pjtk|pf|qz1|qz2</pjzbImportExcelField>
 <!-- qgcjkImportExcelField title="全过程监控数据导入表格字段">id|zyrq|cj|gq|sd|bc|zyxm|xb|hangb|bgdd|zyqj|sdwz|xdwz|dnw|zg|lwg|sjsdrs|zyjj|zz|xc|yd|jhmlh|zyfzr|zydj|dbr|dbrsjh|dbzpxx|cjdk|cjdksj|cjdkzp|zddk|zddksj|zddkzp|zyry|tcmlh|sfapphf</qgcjkImportExcelField> -->
-<qgcjkImportExcelField title="全过程监控数据导入表格字段">gq|cj|jhzt|jhmlh|jhly|zyrq|zyfzr|bc|zylb|zydj|xm|hangb|zywz|dnw|rjhh|xj|zyxm|bgdd|zysd|yxfw|sdwz|xdwz|djz|zyqd|xcl|zg|lwg|dbr|jj|phdw|fgwphdw|bcsm|zz|xc|yd|zjllr|fxdj|gqlsrs|gqzbr|gqsbr|gqsbsj|cjdkr|cjspr|cjshsbsj|ddkr|dspr|dspsj</qgcjkImportExcelField>
+<qgcjkImportExcelField title="全过程监控数据导入表格字段">gq|cj|jhzt|zyml|jhly|zyrq|zyfzr|bc|zylb|zydj|xm|hangb|zywz|dnw|rjhh|xj|zyxm|bgdd|zysd|yxfw|sdwz|xdwz|djz|zyqd|xcl|zg|lwg|dbr|jj|phdw|fgwphdw|bcsm|zz|xc|yd|zjllr|fxdj|gqlsrs|gqzbr|gqsbr|gqsbsj|cjdkr|cjspr|cjshsbsj|ddkr|dspr|dspsj</qgcjkImportExcelField>
 <fhyExcelField title="防护员数据导入字段配置">bh|xm|cj|gq|xb|age|sjh|zzmm|dqfhzg|cjpxsj</fhyExcelField>
 <personExcelField title="部门人员数据导入字段配置">id|name|sex|age|phone|zzmm|zm</personExcelField>
 <importExcelRowCount title="批量导入最大数据行">1000</importExcelRowCount>
