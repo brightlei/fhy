@@ -209,8 +209,10 @@ create table T_QGCJK(
 	cj varchar(50) not null,--车间
 	gq varchar(50) not null,--工区
 	jhly varchar(50) not null,--计划来源：数据字典项
+	zyml varchar(80),--作业命令（作业命令号）
 	hangb varchar(50) not null,--行别：数据字典项
 	dnw varchar(50) not null,--点内外：数据字典项
+	zysd varchar(100),--作业时段
 	bgdd varchar(100) null,--报工地点
 	zyxm varchar(200) null,--作业项目
 	phtzs varchar(100) null,--配合通知书
@@ -243,6 +245,7 @@ create table T_QGCJK(
 	tcsjsj varchar(20),--开窗结束时间
 	sjzydd varchar(100),--实际作业地点
 	wcgzl varchar(200),--完成工作量
+	gwsczpsfsc varchar(20),--轨温三测照片是否上传
 	jcwjjsfyz varchar(20),--进出网机具是否一致
 	zbrs int,--值班人数
 	czwt varchar(500),--存在问题
