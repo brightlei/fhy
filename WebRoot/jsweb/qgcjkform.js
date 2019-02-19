@@ -9,9 +9,27 @@ $(function(){
 	initDicCombobox();
 	loadDeptData(initCheJianList);
 	initEditFormData();
+	// 给时间控件添加双击事件自动填充当前时间
+	initTimeDblclick();
 	//initFormFocus();
 	//loadDicData(initDicCombobox);
 });
+/**
+ * 给时间控件添加双击事件，自动填充当前时间
+ */
+function initTimeDblclick(){
+	$("input[field=timespinner]").parent().dblclick(function(){
+		var id = $(this).find("input[field=timespinner]").attr("id");
+		var now = new Date();
+		var hour = now.getHours();
+		hour = hour < 10?"0"+hour:""+hour;
+		var minute = now.getMinutes();
+		minute = minute < 10?"0"+minute:""+minute;
+		var time = hour+":"+minute;
+		$("#"+id).timespinner('setValue',time);
+	});
+}
+
 function initFormFocus(){
 	var elems = $("form *[field]");
 	console.log(elems);
@@ -110,7 +128,7 @@ function loadFhyData(cj,gq){
 		if(rsMap.code==0){
 			var data = rsMap.data;
 			console.log(data);
-			data.unshift({bh:"",xm:"空数据"});
+			data.unshift({bh:"",xm:"--请选择--"});
 			initFhyCombobox("zz",data);
 			initFhyCombobox("xc",data);
 			initFhyCombobox("yd",data);

@@ -155,7 +155,10 @@ function initQueryDataGrid(){
 			}},
 			{field:'dnw',title:'点内/外',width:'80'},
 			{field:'yjbt',title:'夜间/白天',width:'80'}
-		]]
+		]],
+		onDblClickCell:function(index, field, value){
+			showTableCellInfo(value);
+		}
 	});
 	searchByCondition();
 }

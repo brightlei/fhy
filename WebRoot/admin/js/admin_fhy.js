@@ -90,7 +90,7 @@ function initDataGrid(){
 		    formatter:function(value,row,index){
 		    	return '<button class="layui-btn layui-btn-normal layui-btn-xs" onclick="editData('+index+')">修改</button>';
 		    }},
-		    {field:'bh',title:'工号',width:'60',align:'center'},
+		    {field:'bh',title:'工号',width:'150',align:'center'},
 			{field:'xm',title:'姓名',width:'80'},
 			{field:'cj',title:'车间',width:'110'},
 			{field:'gq',title:'工区',width:'120'},

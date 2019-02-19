@@ -280,6 +280,22 @@ function onShowComboPanel(){
 	$(".combo-panel").css("max-height","240px");
 }
 
+//详细信息弹出层的ID号
+var infoLayerIndex = 0;
+/**
+ * 表格列双击显示详细信息
+ */
+function showTableCellInfo(value){
+	layer.close(infoLayerIndex);
+	infoLayerIndex = layer.open({
+		type: 1,
+		shade: false,
+		area:["500px","auto"],
+		title: false,//不显示标题
+		content: '<div style="width:480px;background:orange;padding:10px;overflow:hidden;">'+value+'</div>'
+	});
+}
+
 /**
  * 按某属性进行排序
  * @param attr 对象中需要排序的字段

@@ -22,12 +22,16 @@ $(function(){
 
 //数据字典加载完成回调事件
 function initDicCombobox(){
-	initCombobox("wzlb",getDicData("WZLB",false),"val","text",function(){
+	var wzlbData = getDicData("WZLB",false);
+	wzlbData.unshift({id: 0,val: "",text: "--请选择--"});
+	initCombobox("wzlb",wzlbData,"val","text",function(){
 		if(selectRecord!=null){
 			$("#wzlb").combobox('setValue',selectRecord.wzlb);
 		}
 	});
-	initCombobox("wzxz",getDicData("WZXZ",false),"val","text",function(){
+	var wzxzData = getDicData("WZXZ",false);
+	wzxzData.unshift({id: 0,val: "",text: "--请选择--"});
+	initCombobox("wzxz",wzxzData,"val","text",function(){
 		if(selectRecord!=null){
 			$("#wzxz").combobox('setValue',selectRecord.wzxz);
 		}
@@ -127,6 +131,7 @@ function loadFhyData(cj,gq){
 	doAjax("service/api",param,{},function(rsMap,op){
 		if(rsMap.code==0){
 			var data = rsMap.data;
+			//data.unshift({rybs: "",xm: "--请选择--"});
 			console.log(data);
 			$("#zyzrr").combobox({
 				valueField:"rybs",//valueField:"bh",
@@ -134,7 +139,11 @@ function loadFhyData(cj,gq){
 				multiple:true,
 				editable:false,
 				formatter:function(row){
-					return row.xm+"（职名："+row.zm+"，年龄："+row.age+"，政治面貌："+row.zzmm+"）";
+					if(row.rybs!=""){
+						return row.xm+"（职名："+row.zm+"，年龄："+row.age+"，政治面貌："+row.zzmm+"）";
+					}else{
+						return row.xm;
+					}
 				},
 				onShowPanel:onShowComboPanel
 			});
@@ -148,10 +157,9 @@ function loadFhyData(cj,gq){
 							values.push(data[i].rybs);
 						}
 					}
-					console.log(values);
 					$('#zyzrr').combobox('setValues', values);
 				}else{
-					$("#zyzrr").combobox("setValue",data[0].rybs);
+					//$("#zyzrr").combobox("setValue","");
 				}
 			}
 		}
@@ -336,7 +344,19 @@ function saveData(){
 		layer.msg("请选择发现人及单位并添加到列表中！");
 		return;
 	}
+	if(param.wzlb==""){
+		layer.msg("请选择违章类别！");
+		return;
+	}
+	if(param.wzxz==""){
+		layer.msg("请选择违章性质！");
+		return;
+	}
 	var zyzrr = param.zyzrr;
+	if(zyzrr==""){
+		layer.msg("请选择主要责任人！");
+		return;
+	}
 	var tArr = zyzrr.split(",");
 	var zrrArr = [];
 	for(var i=0;i<tArr.length;i++){

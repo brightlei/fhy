@@ -158,7 +158,10 @@ function initDataGrid(){
 			{field:'yjbt',title:'夜间/白天',width:'80'},
 			{field:'cjsj',title:'创建时间',width:'140'},
 			{field:'xgsj',title:'最后修改时间',width:'140'}
-		]]
+		]],
+		onDblClickCell:function(index, field, value){
+			showTableCellInfo(value);
+		}
 //		loadFilter:function(data){
 //			var rows = data.rows;
 //			cache["rows"]=rows;

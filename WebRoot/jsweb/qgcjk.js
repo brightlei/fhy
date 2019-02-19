@@ -93,8 +93,10 @@ function initDataGrid(){
 			{field:'cj',title:'车间',width:'110'},
 			{field:'gq',title:'工区',width:'120'},
 			{field:'jhly',title:'计划来源'},
+			{field:'zyml',title:'作业命令号'},
 			{field:'hangb',title:'行别'},
 			{field:'dnw',title:'点内外'},
+			{field:'zysd',title:'作业时段'},
 			{field:'bgdd',title:'报工地点',width:'220'},
 			{field:'zyxm',title:'作业项目',width:'220'},
 			{field:'phtzs',title:'配合通知书'},
@@ -125,13 +127,17 @@ function initDataGrid(){
 			{field:'tdtc',title:'图定天窗'},
 			{field:'tckssj',title:'开窗开始时间'},
 			{field:'tcsjsj',title:'开窗结束时间'},
-			{field:'sjzydd',title:'实际作业地点'},
-			{field:'wcgzl',title:'完成工作量'},
+			{field:'sjzydd',title:'实际作业地点',width:'220'},
+			{field:'wcgzl',title:'完成工作量',width:'220'},
+			{field:'gwsczpsfsc',title:'轨温三测照片是否上传'},
 			{field:'jcwjjsfyz',title:'进出网机具是否一致'},
 			{field:'zbrs',title:'值班人数'},
 			{field:'czwt',title:'存在问题'},
 			{field:'clyj',title:'处理意见'}
-		]]
+		]],
+		onDblClickCell:function(index, field, value){
+			showTableCellInfo(value);
+		}
 	});
 }
 //条件模糊查询
