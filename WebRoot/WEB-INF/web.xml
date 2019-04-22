@@ -3,7 +3,7 @@
 	xmlns="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	id="WebApp_ID" version="2.5">
-	<display-name>防护员积分管理系统11122</display-name>
+	<display-name>防护员积分管理系统11122234</display-name>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:applicationContext.xml</param-value>

@@ -118,9 +118,10 @@ function initDataGrid(){
 		border:false,
 		rownumbers:true,
 		singleSelect:true,
+		//优化数据加载速度
 		autoRowHeight:false,
+		nowrap:true,
 		striped:true,
-		//nowrap:false,
 		fit:true,
 		pagination:true,
 		pageNumber:1,

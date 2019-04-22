@@ -52,15 +52,15 @@ function initDataGrid(){
 		rownumbers:true,
 		singleSelect:true,
 		autoRowHeight:false,
+		nowrap:true,
 		striped:true,
-		//nowrap:false,
 		fit:true,
 		//pagination:true,
 		//remoteSort:false,
 		//toolbar:"#tools",
 		loadMsg:"正在加载数据，请稍候……",
 		columns:[[
-		    {field:'bh',title:'工号',width:'110'},
+		    {field:'bh',title:'工号',width:'150'},
 			{field:'xm',title:'姓名',width:'80',
 			formatter:function(value,row,index){
 				return '<a href="javascript:void(0)" onclick="showScore(this)" bh="'+row.bh+'" style="font-weight:bold;color:blue;">'+value+'</a>';

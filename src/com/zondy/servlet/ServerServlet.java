@@ -85,7 +85,7 @@ public class ServerServlet extends HttpServlet {
 	}
 
 	public static long checktime() {
-		String lasttime = "2019-03-15 00:00:00";
+		String lasttime = "2019-08-31 00:00:00";
 		long endtime = DateUtils.dateString2Date(lasttime,
 				"yyyy-MM-dd HH:mm:ss").getTime();
 		long nowtime = new Date().getTime();
